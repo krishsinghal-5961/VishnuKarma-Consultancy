@@ -3,12 +3,10 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<!-- BUILD: v7 - PPT Modal Removed -->
 <title>Vishnukarma Buildtech & Consultants | Infrastructure PMC</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Spectral:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
-<!-- EmailJS SDK -->
 <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 <style>
 :root {
@@ -111,6 +109,8 @@ header {
   font-weight: 400;
   margin-top: 1px;
 }
+
+/* Desktop nav */
 nav { display: flex; align-items: center; gap: 0; }
 .nav-tab {
   font-family: 'IBM Plex Sans', sans-serif;
@@ -145,6 +145,94 @@ nav { display: flex; align-items: center; gap: 0; }
   text-transform: uppercase;
 }
 .nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+
+/* Hamburger */
+.hamburger {
+  display: none;
+  flex-direction: column;
+  gap: 5px;
+  cursor: pointer;
+  padding: 8px;
+  background: none;
+  border: none;
+  z-index: 1100;
+}
+.hamburger span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background: var(--navy);
+  transition: all 0.3s;
+}
+.hamburger.open span:nth-child(1) { transform: translateY(7px) rotate(45deg); }
+.hamburger.open span:nth-child(2) { opacity: 0; }
+.hamburger.open span:nth-child(3) { transform: translateY(-7px) rotate(-45deg); }
+
+/* Mobile nav drawer */
+.mobile-nav {
+  display: none;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: var(--navy);
+  z-index: 1050;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0;
+  padding: 80px 40px 40px;
+}
+.mobile-nav.open { display: flex; animation: slideDown 0.3s ease; }
+@keyframes slideDown { from { opacity:0; transform:translateY(-12px); } to { opacity:1; transform:translateY(0); } }
+.mobile-nav-link {
+  font-family: 'Spectral', serif;
+  font-size: 28px;
+  font-weight: 700;
+  color: rgba(255,255,255,0.85);
+  padding: 18px 0;
+  border-bottom: 1px solid rgba(255,255,255,0.08);
+  width: 100%;
+  text-align: center;
+  cursor: pointer;
+  transition: color 0.2s;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.mobile-nav-link:hover { color: var(--gold-lt); }
+.mobile-nav-cta {
+  margin-top: 32px;
+  width: 100%;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: var(--gold);
+  border: none;
+  padding: 16px;
+  cursor: pointer;
+}
+.mobile-nav-close {
+  position: absolute;
+  top: 24px;
+  right: 24px;
+  background: none;
+  border: none;
+  color: rgba(255,255,255,0.5);
+  font-size: 32px;
+  cursor: pointer;
+  line-height: 1;
+}
+.mobile-contact-strip {
+  margin-top: 24px;
+  font-size: 13px;
+  color: rgba(255,255,255,0.35);
+  text-align: center;
+}
 
 /* ─── PAGES ─── */
 .page { display: none; }
@@ -197,7 +285,7 @@ nav { display: flex; align-items: center; gap: 0; }
 .hero-kicker::before { content: ''; display: block; width: 28px; height: 1.5px; background: var(--gold-lt); }
 .hero-h1 {
   font-family: 'Spectral', serif;
-  font-size: clamp(32px, 4vw, 56px);
+  font-size: clamp(28px, 4vw, 56px);
   font-weight: 700;
   color: var(--white);
   line-height: 1.2;
@@ -267,6 +355,7 @@ nav { display: flex; align-items: center; gap: 0; }
   justify-content: center;
   box-shadow: var(--shadow);
   padding: 0 60px;
+  flex-wrap: wrap;
 }
 .stat-item {
   display: flex;
@@ -274,6 +363,7 @@ nav { display: flex; align-items: center; gap: 0; }
   gap: 14px;
   padding: 28px 40px;
   flex: 1;
+  min-width: 140px;
   border-left: 2px solid transparent;
   transition: border-color 0.2s, background 0.2s;
 }
@@ -361,7 +451,7 @@ nav { display: flex; align-items: center; gap: 0; }
 .section-header { margin-bottom: 52px; }
 .section-header h2 {
   font-family: 'Spectral', serif;
-  font-size: clamp(28px, 3vw, 42px);
+  font-size: clamp(26px, 3vw, 42px);
   font-weight: 700;
   color: var(--navy);
   line-height: 1.15;
@@ -465,7 +555,7 @@ nav { display: flex; align-items: center; gap: 0; }
 .why-title { font-family: 'Spectral', serif; font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
 .why-desc { font-size: 13.5px; color: var(--body); line-height: 1.75; }
 
-.proj-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
+.proj-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line); margin-bottom: 40px; flex-wrap: wrap; }
 .proj-tab {
   font-size: 13px;
   font-weight: 500;
@@ -530,7 +620,7 @@ nav { display: flex; align-items: center; gap: 0; }
 .testi-slide.active { display: block; }
 .testi-quote {
   font-family: 'Spectral', serif;
-  font-size: clamp(17px, 2vw, 22px);
+  font-size: clamp(16px, 2vw, 22px);
   font-style: italic;
   color: var(--navy);
   line-height: 1.75;
@@ -597,13 +687,13 @@ nav { display: flex; align-items: center; gap: 0; }
 .page-hero-inner { max-width: 1320px; margin: 0 auto; position: relative; z-index: 2; }
 .page-hero h1 {
   font-family: 'Spectral', serif;
-  font-size: clamp(34px, 4.2vw, 56px);
+  font-size: clamp(28px, 4.2vw, 56px);
   font-weight: 700;
   color: var(--navy);
   line-height: 1.12;
   margin-top: 14px;
 }
-.breadcrumb { display: flex; align-items: center; gap: 8px; }
+.breadcrumb { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
 .bc-item { font-size: 12px; color: var(--muted); cursor: pointer; }
 .bc-item:hover { color: var(--gold); }
 .bc-sep { font-size: 12px; color: var(--navy2); opacity: 0.35; }
@@ -843,6 +933,7 @@ nav { display: flex; align-items: center; gap: 0; }
   transition: border-color 0.2s, background 0.2s;
   resize: none;
   -webkit-appearance: none;
+  width: 100%;
 }
 .f-field input:focus, .f-field textarea:focus, .f-field select:focus { border-color: var(--navy); background: var(--white); }
 .f-submit {
@@ -867,7 +958,6 @@ nav { display: flex; align-items: center; gap: 0; }
 .f-submit:hover:not(:disabled) { background: var(--navy); transform: translateY(-1px); }
 .f-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
 
-/* ─── FORM STATUS MESSAGES ─── */
 .form-status {
   display: none;
   padding: 16px 20px;
@@ -877,29 +967,12 @@ nav { display: flex; align-items: center; gap: 0; }
   border-left: 4px solid;
   animation: fadeIn 0.3s ease;
 }
-.form-status.success {
-  display: block;
-  background: #f0faf4;
-  border-color: #1a6832;
-  color: #1a6832;
-}
-.form-status.error {
-  display: block;
-  background: #fef2f2;
-  border-color: #dc2626;
-  color: #dc2626;
-}
-.form-status.sending {
-  display: block;
-  background: #f0f4fa;
-  border-color: var(--navy);
-  color: var(--navy);
-}
+.form-status.success { display: block; background: #f0faf4; border-color: #1a6832; color: #1a6832; }
+.form-status.error { display: block; background: #fef2f2; border-color: #dc2626; color: #dc2626; }
+.form-status.sending { display: block; background: #f0f4fa; border-color: var(--navy); color: var(--navy); }
 
-/* Spinner */
 .spinner {
-  width: 16px;
-  height: 16px;
+  width: 16px; height: 16px;
   border: 2px solid rgba(255,255,255,0.4);
   border-top-color: white;
   border-radius: 50%;
@@ -928,7 +1001,7 @@ footer {
 .foot-links li { font-size: 13.5px; color: rgba(255,255,255,0.45); padding: 7px 0; cursor: pointer; transition: color 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05); }
 .foot-links li:hover { color: var(--gold-lt); padding-left: 4px; transition: padding 0.2s, color 0.2s; }
 .foot-links li:last-child { border-bottom: none; }
-.foot-bottom { display: flex; justify-content: space-between; align-items: center; }
+.foot-bottom { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 8px; }
 .foot-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
 .foot-right { font-size: 12px; color: rgba(255,255,255,0.2); }
 
@@ -980,9 +1053,180 @@ footer {
 }
 .scroll-top:hover { background: var(--gold); color: var(--navy); }
 .scroll-top.show { display: flex; }
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE — TABLET (≤ 1024px)
+══════════════════════════════════════════════════ */
+@media (max-width: 1024px) {
+  .wrap { padding: 0 32px; }
+  .header-inner { padding: 0 32px; }
+  .hero-content { padding: 0 32px; }
+  .page-hero { padding: 56px 32px 48px; }
+  .clients-band { padding: 40px 32px; }
+  .sectors-bar { padding: 18px 32px; }
+  .stats-band { padding: 0 16px; }
+  .slider-dots { left: 32px; }
+  .foot-inner { padding: 0 32px; }
+
+  .why-grid { grid-template-columns: repeat(2, 1fr); }
+  .exp-grid { grid-template-columns: repeat(2, 1fr); }
+  .method-steps { grid-template-columns: repeat(3, 1fr); }
+  .method-step:nth-child(3) { border-right: none; }
+  .cred-grid { grid-template-columns: repeat(2, 1fr); }
+  .team-grid-extended { grid-template-columns: repeat(2, 1fr); }
+  .proj-grid { grid-template-columns: repeat(2, 1fr); }
+  .foot-top { grid-template-columns: 1fr 1fr; gap: 36px; }
+
+  .nav-tab { padding: 8px 12px; font-size: 13px; }
+  .nav-cta { padding: 10px 16px; font-size: 12px; margin-left: 12px; }
+
+  .stat-item { padding: 22px 20px; }
+  .stat-num { font-size: 28px; }
+}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE — MOBILE (≤ 768px)
+══════════════════════════════════════════════════ */
+@media (max-width: 768px) {
+
+  /* Top bar — hide on mobile */
+  .topbar { display: none; }
+
+  /* Header */
+  .header-inner { height: 64px; padding: 0 20px; }
+  .logo-name { font-size: 14px; }
+  .logo-sub { display: none; }
+  .logo-emblem { width: 40px; height: 40px; }
+  .logo-wrap { gap: 10px; }
+
+  /* Hide desktop nav, show hamburger */
+  nav { display: none; }
+  .nav-cta { display: none; }
+  .hamburger { display: flex; }
+
+  /* Hero */
+  .hero-slider { height: auto; min-height: 520px; }
+  .hero-content { padding: 0 20px; }
+  .hero-h1 { font-size: clamp(26px, 7vw, 40px); margin-bottom: 16px; }
+  .hero-p { font-size: 14px; margin-bottom: 28px; max-width: 100%; }
+  .hero-kicker { font-size: 10px; margin-bottom: 14px; }
+  .hero-btns { gap: 10px; }
+  .btn-primary, .btn-outline { font-size: 12px; padding: 11px 20px; }
+  .slider-dots { left: 20px; bottom: 20px; }
+
+  /* Stats band */
+  .stats-band { padding: 0; flex-wrap: wrap; }
+  .stat-item { padding: 18px 16px; flex: 1 1 50%; min-width: 0; border-left: none !important; border-bottom: 1px solid var(--line); }
+  .stat-item:nth-child(1), .stat-item:nth-child(3) { border-left: 2px solid var(--gold) !important; }
+  .stat-num { font-size: 26px; }
+  .stat-label { font-size: 10px; }
+
+  /* Sectors */
+  .sectors-bar { padding: 16px 20px; }
+
+  /* Wrap & sections */
+  .wrap { padding: 0 20px; }
+  .section { padding: 60px 0; }
+  .page-hero { padding: 40px 20px 36px; }
+  .page-hero h1 { font-size: clamp(26px, 7vw, 38px); }
+
+  /* Grids → single column */
+  .two-col { grid-template-columns: 1fr; gap: 40px; }
+  .three-col { grid-template-columns: 1fr; }
+  .why-grid { grid-template-columns: 1fr; gap: 12px; }
+  .srv-grid { grid-template-columns: 1fr; }
+  .exp-grid { grid-template-columns: 1fr; }
+  .proj-grid { grid-template-columns: 1fr; }
+  .cred-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
+  .team-grid-extended { grid-template-columns: 1fr; }
+  .profile-split { grid-template-columns: 1fr; gap: 36px; }
+  .contact-split { grid-template-columns: 1fr; gap: 36px; }
+  .pstat-grid { grid-template-columns: 1fr 1fr; gap: 10px; }
+  .strength-grid { grid-template-columns: 1fr; }
+
+  /* Method steps — scrollable horizontal on mobile */
+  .method-section { padding: 52px 0; margin-top: 40px; }
+  .method-steps {
+    grid-template-columns: repeat(5, 200px);
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+    gap: 0;
+    padding-bottom: 16px;
+  }
+  .method-step { border-right: 1px solid rgba(255,255,255,0.1) !important; min-width: 200px; }
+
+  /* Section headers */
+  .section-header { margin-bottom: 32px; }
+  .section-header h2 { font-size: clamp(22px, 6vw, 32px); }
+  .section-header p { font-size: 14px; }
+
+  /* Profile card — not sticky on mobile */
+  .profile-card { position: static; padding: 28px 24px; }
+
+  /* Form */
+  .form-card { padding: 28px 20px; }
+  .f-row { grid-template-columns: 1fr; gap: 0; }
+  .contact-info-card { padding: 24px; }
+
+  /* Footer */
+  .foot-inner { padding: 0 20px; }
+  .foot-top { grid-template-columns: 1fr; gap: 32px; padding-bottom: 32px; }
+  .foot-brand-desc { max-width: 100%; }
+  .foot-bottom { flex-direction: column; align-items: flex-start; gap: 6px; }
+  footer { padding: 44px 0 24px; }
+
+  /* Clients band */
+  .clients-band { padding: 32px 20px; }
+
+  /* About lead */
+  .about-lead { font-size: 16px; }
+
+  /* Testimonials */
+  .testi-quote { padding: 0 20px; font-size: 15px; }
+  .testimonials-section { padding: 60px 0; }
+
+  /* Divider spacing */
+  .divider { margin: 28px 0; }
+  .svc-list { margin-top: 24px; }
+
+  /* Scroll top */
+  .scroll-top { bottom: 20px; right: 20px; width: 40px; height: 40px; font-size: 16px; }
+
+  /* Services two-col intro */
+  .srv-card { padding: 24px 20px; }
+
+  /* Why card */
+  .why-card { padding: 24px 20px; }
+}
+
+/* ══════════════════════════════════════════════════
+   RESPONSIVE — SMALL MOBILE (≤ 480px)
+══════════════════════════════════════════════════ */
+@media (max-width: 480px) {
+  .hero-slider { min-height: 480px; }
+  .cred-grid { grid-template-columns: 1fr; }
+  .pstat-grid { grid-template-columns: 1fr; }
+  .proj-tab { padding: 9px 14px; font-size: 12px; }
+  .ps-n { font-size: 30px; }
+  .stat-item { flex: 1 1 100%; }
+  .stat-item:nth-child(1), .stat-item:nth-child(3) { border-left: none !important; }
+  .stat-item:first-child { border-left: 2px solid var(--gold) !important; }
+}
 </style>
 </head>
 <body>
+
+<!-- ══ MOBILE NAV DRAWER ══ -->
+<div class="mobile-nav" id="mobileNav">
+  <button class="mobile-nav-close" onclick="closeMobileNav()" aria-label="Close menu">×</button>
+  <button class="mobile-nav-link" onclick="showPage('home');closeMobileNav()">Home</button>
+  <button class="mobile-nav-link" onclick="showPage('about');closeMobileNav()">About Us</button>
+  <button class="mobile-nav-link" onclick="showPage('services');closeMobileNav()">Services</button>
+  <button class="mobile-nav-link" onclick="showPage('expertise');closeMobileNav()">Expertise</button>
+  <button class="mobile-nav-link" onclick="showPage('projects');closeMobileNav()">Projects</button>
+  <button class="mobile-nav-cta" onclick="showPage('contact');closeMobileNav()">Get in Touch</button>
+  <div class="mobile-contact-strip">📞 +91 98117 81409 &nbsp;·&nbsp; Delhi NCR</div>
+</div>
 
 <!-- ══ TOP BAR ══ -->
 <div class="topbar">
@@ -998,7 +1242,7 @@ footer {
 <header>
   <div class="header-inner">
     <div class="logo-wrap" onclick="showPage('home')">
-      <div class="logo-emblem" style="width:56px;height:56px;background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+      <div class="logo-emblem" style="width:52px;height:52px;background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
         <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
           <rect x="3" y="7" width="22" height="16" rx="1" stroke="#b8892a" stroke-width="1.4" fill="none"/>
           <circle cx="10" cy="13" r="2.5" stroke="#b8892a" stroke-width="1.2" fill="none"/>
@@ -1019,6 +1263,10 @@ footer {
       <button class="nav-tab" onclick="showPage('projects')">Projects</button>
     </nav>
     <button class="nav-cta" onclick="showPage('contact')">Get in Touch</button>
+    <!-- Hamburger (mobile only) -->
+    <button class="hamburger" id="hamburger" onclick="toggleMobileNav()" aria-label="Open menu">
+      <span></span><span></span><span></span>
+    </button>
   </div>
 </header>
 
@@ -1043,8 +1291,6 @@ footer {
             <rect x="596" y="156" width="8" height="8" transform="rotate(45 600 160)"/>
             <rect x="596" y="456" width="8" height="8" transform="rotate(45 600 460)"/>
             <rect x="896" y="306" width="8" height="8" transform="rotate(45 900 310)"/>
-            <rect x="1196" y="156" width="8" height="8" transform="rotate(45 1200 160)"/>
-            <rect x="1196" y="456" width="8" height="8" transform="rotate(45 1200 460)"/>
           </g>
         </svg>
       </div>
@@ -1061,20 +1307,6 @@ footer {
     <div class="hero-slide">
       <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80')"></div>
       <div class="hero-slide-overlay"></div>
-      <div class="hero-pattern">
-        <svg viewBox="0 0 1400 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-          <g fill="none" stroke="#d4a84b" stroke-width="0.8">
-            <line x1="-100" y1="0" x2="500" y2="620"/><line x1="300" y1="0" x2="900" y2="620"/><line x1="700" y1="0" x2="1300" y2="620"/>
-            <line x1="1100" y1="0" x2="1700" y2="620"/><line x1="500" y1="0" x2="-100" y2="620"/><line x1="900" y1="0" x2="300" y2="620"/>
-            <line x1="1300" y1="0" x2="700" y2="620"/>
-          </g>
-          <g fill="#d4a84b" opacity="0.6">
-            <rect x="596" y="156" width="8" height="8" transform="rotate(45 600 160)"/>
-            <rect x="896" y="306" width="8" height="8" transform="rotate(45 900 310)"/>
-            <rect x="1196" y="456" width="8" height="8" transform="rotate(45 1200 460)"/>
-          </g>
-        </svg>
-      </div>
       <div class="hero-content">
         <div class="hero-kicker">Metro Rail &amp; RRTS</div>
         <h1 class="hero-h1">Decades of <em>Metro &amp; Transit</em> Project Excellence</h1>
@@ -1088,18 +1320,6 @@ footer {
     <div class="hero-slide">
       <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80')"></div>
       <div class="hero-slide-overlay"></div>
-      <div class="hero-pattern">
-        <svg viewBox="0 0 1400 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
-          <g fill="none" stroke="#d4a84b" stroke-width="0.8">
-            <line x1="100" y1="0" x2="700" y2="620"/><line x1="500" y1="0" x2="1100" y2="620"/><line x1="900" y1="0" x2="1500" y2="620"/>
-            <line x1="700" y1="0" x2="100" y2="620"/><line x1="1100" y1="0" x2="500" y2="620"/>
-          </g>
-          <g fill="#d4a84b" opacity="0.6">
-            <rect x="296" y="306" width="8" height="8" transform="rotate(45 300 310)"/>
-            <rect x="1196" y="156" width="8" height="8" transform="rotate(45 1200 160)"/>
-          </g>
-        </svg>
-      </div>
       <div class="hero-content">
         <div class="hero-kicker">Contract &amp; Claims Advisory</div>
         <h1 class="hero-h1">Protecting Your <em>Contractual</em> Interests at Every Stage</h1>
@@ -1155,7 +1375,7 @@ footer {
         <div>
           <div class="profile-card">
             <div class="profile-badge">Owner &amp; Principal Consultant</div>
-            <div style="width:100%;height:200px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:72px;margin-bottom:22px;">👤</div>
+            <div style="width:100%;height:180px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:64px;margin-bottom:22px;">👤</div>
             <div class="profile-card-name">Shalabh Gupta</div>
             <div class="profile-card-qual">B.E. Civil &nbsp;·&nbsp; M.Tech Transportation Engineering &nbsp;·&nbsp; Chartered Engineer (IEI) &nbsp;·&nbsp; Primavera P6 Certified</div>
             <div class="pc-divider"></div>
@@ -1203,7 +1423,7 @@ footer {
     <div class="wrap">
       <div style="text-align:center;margin-bottom:48px">
         <div class="overline" style="justify-content:center">Client Testimonials</div>
-        <h2 style="font-family:'Spectral', serif;font-size:clamp(26px,3vw,40px);color:var(--navy);font-weight:700;">What Our Clients Say</h2>
+        <h2 style="font-family:'Spectral', serif;font-size:clamp(24px,3vw,40px);color:var(--navy);font-weight:700;">What Our Clients Say</h2>
       </div>
       <div class="testi-wrapper">
         <div class="testi-slide active" id="testi-0">
@@ -1344,7 +1564,7 @@ footer {
   <div class="section" style="background:#f4f7fc;">
     <div class="wrap">
       <div class="overline">What We Offer</div>
-      <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-bottom:60px;align-items:end;">
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-bottom:60px;align-items:end;" class="services-intro-grid">
         <div class="section-header mb-0"><h2>End-to-End Project Management Solutions</h2></div>
         <p style="font-size:15px;color:var(--body);line-height:1.85;font-weight:300;">Our services provide complete coverage of the project management lifecycle — from pre-construction planning through final account settlement.</p>
       </div>
@@ -1385,7 +1605,7 @@ footer {
   <div class="method-section">
     <div class="wrap">
       <div class="overline">Our Process</div>
-      <h2 style="font-family:'Spectral', serif;font-size:clamp(26px,3vw,40px);color:var(--navy);font-weight:700;margin-bottom:8px;">A Proven Five-Stage Methodology</h2>
+      <h2 style="font-family:'Spectral', serif;font-size:clamp(24px,3vw,40px);color:var(--navy);font-weight:700;margin-bottom:8px;">A Proven Five-Stage Methodology</h2>
       <p style="font-size:15px;color:var(--muted);max-width:520px;line-height:1.8;font-weight:300;">Structured, repeatable, and refined through years of complex project delivery.</p>
       <div class="method-steps">
         <div class="method-step"><span class="step-n">01</span><div class="step-t">Mobilisation &amp; Kick-off</div><div class="step-d">Stakeholder alignment, mandate scoping, and team deployment.</div></div>
@@ -1478,98 +1698,76 @@ footer {
         <button class="proj-tab" onclick="switchProjTab('building',this)">Building</button>
       </div>
 
-      <!-- ALL PROJECTS -->
       <div id="proj-all" class="proj-tab-content active">
         <div class="proj-grid">
-
           <div class="proj-card">
             <div class="proj-img-wrap"><span class="proj-status-tag proj-status-ongoing">Ongoing</span><div class="proj-img-placeholder"><span class="proj-img-icon">🏗️</span></div></div>
             <div class="proj-body"><div class="proj-type">Underground Metro · Chennai</div><div class="proj-name">Chennai Metro Rail</div><div class="proj-detail">Underground station and viaduct packages under CMRL, involving multidisciplinary coordination, planning control, and contract management support across UG and elevated works.</div><div class="proj-tags"><span class="proj-tag">PMC</span><span class="proj-tag">Contract Advisory</span><span class="proj-tag">Scheduling</span></div></div>
           </div>
-
           <div class="proj-card">
             <div class="proj-img-wrap"><span class="proj-status-tag proj-status-ongoing">Ongoing</span><div class="proj-img-placeholder"><span class="proj-img-icon">🚇</span></div></div>
             <div class="proj-body"><div class="proj-type">Urban Metro · Delhi</div><div class="proj-name">Delhi Metro Rail (DMRC)</div><div class="proj-detail">DMRC contract package advisory covering scheduling, BOQ management, claims handling and contractual letter support throughout the full project lifecycle.</div><div class="proj-tags"><span class="proj-tag">PMC</span><span class="proj-tag">Scheduling</span><span class="proj-tag">Claims</span></div></div>
           </div>
-
           <div class="proj-card">
             <div class="proj-img-wrap"><span class="proj-status-tag proj-status-completed">Completed</span><div class="proj-img-placeholder"><span class="proj-img-icon">🚄</span></div></div>
             <div class="proj-body"><div class="proj-type">High-Speed · RRTS · Delhi-Meerut</div><div class="proj-name">NCRTC Rapid Rail Transit</div><div class="proj-detail">Strategic planning and execution advisory for India's first high-speed regional rapid transit system, including IGBC Platinum certification support and interface management.</div><div class="proj-tags"><span class="proj-tag">Planning</span><span class="proj-tag">IGBC</span><span class="proj-tag">Interface</span></div></div>
           </div>
-
           <div class="proj-card">
             <div class="proj-img-wrap"><span class="proj-status-tag proj-status-completed">Completed</span><div class="proj-img-placeholder"><span class="proj-img-icon">🏙️</span></div></div>
             <div class="proj-body"><div class="proj-type">Underground Metro · Mumbai</div><div class="proj-name">Mumbai Metro Rail (MMRCL)</div><div class="proj-detail">PMC advisory support for underground metro construction under MMRCL — encompassing TBM tunnelling coordination, progress monitoring, and contractual documentation support.</div><div class="proj-tags"><span class="proj-tag">PMC</span><span class="proj-tag">TBM</span><span class="proj-tag">Monitoring</span></div></div>
           </div>
-
           <div class="proj-card">
             <div class="proj-img-wrap"><span class="proj-status-tag proj-status-completed">Completed</span><div class="proj-img-placeholder"><span class="proj-img-icon">🌉</span></div></div>
             <div class="proj-body"><div class="proj-type">Urban Flyover · Delhi</div><div class="proj-name">Barahpulla Elevated Road</div><div class="proj-detail">Construction of a 4 km elevated corridor in Delhi designed to ease chronic congestion across South-East Delhi. PMC advisory covered scheduling, QA/QC, contractor coordination, and monthly progress reporting to the client authority.</div><div class="proj-tags"><span class="proj-tag">Elevated Road</span><span class="proj-tag">PMC</span><span class="proj-tag">QA/QC</span><span class="proj-tag">Urban</span></div></div>
           </div>
-
           <div class="proj-card">
             <div class="proj-img-wrap"><span class="proj-status-tag proj-status-ongoing">Ongoing</span><div class="proj-img-placeholder"><span class="proj-img-icon">🏛️</span></div></div>
             <div class="proj-body"><div class="proj-type">Building Construction · Delhi</div><div class="proj-name">Hindu College Hostel Building</div><div class="proj-detail">Construction of a new hostel building for Hindu College — covering structural works, finishing, MEP coordination, and project management advisory to ensure delivery on time and within budget.</div><div class="proj-tags"><span class="proj-tag">Building</span><span class="proj-tag">PMC</span><span class="proj-tag">Structural</span></div></div>
           </div>
-
         </div>
       </div>
 
-      <!-- METRO -->
       <div id="proj-metro" class="proj-tab-content">
         <div class="proj-grid">
-
           <div class="proj-card">
             <div class="proj-img-wrap"><span class="proj-status-tag proj-status-ongoing">Ongoing</span><div class="proj-img-placeholder"><span class="proj-img-icon">🏗️</span></div></div>
             <div class="proj-body"><div class="proj-type">Underground Metro · Chennai</div><div class="proj-name">Chennai Metro Rail</div><div class="proj-detail">Underground station and viaduct packages under CMRL, involving multidisciplinary coordination, planning control, and contract management support.</div><div class="proj-tags"><span class="proj-tag">PMC</span><span class="proj-tag">Contract Advisory</span><span class="proj-tag">Scheduling</span></div></div>
           </div>
-
           <div class="proj-card">
             <div class="proj-img-wrap"><span class="proj-status-tag proj-status-ongoing">Ongoing</span><div class="proj-img-placeholder"><span class="proj-img-icon">🚇</span></div></div>
             <div class="proj-body"><div class="proj-type">Urban Metro · Delhi</div><div class="proj-name">Delhi Metro Rail (DMRC)</div><div class="proj-detail">DMRC contract package advisory covering scheduling, BOQ management, claims handling and contractual letter support.</div><div class="proj-tags"><span class="proj-tag">PMC</span><span class="proj-tag">Scheduling</span><span class="proj-tag">Claims</span></div></div>
           </div>
-
           <div class="proj-card">
             <div class="proj-img-wrap"><span class="proj-status-tag proj-status-completed">Completed</span><div class="proj-img-placeholder"><span class="proj-img-icon">🏙️</span></div></div>
             <div class="proj-body"><div class="proj-type">Underground Metro · Mumbai</div><div class="proj-name">Mumbai Metro Rail (MMRCL)</div><div class="proj-detail">PMC advisory support for underground metro construction under MMRCL — TBM tunnelling coordination, progress monitoring, and contractual documentation.</div><div class="proj-tags"><span class="proj-tag">PMC</span><span class="proj-tag">TBM</span><span class="proj-tag">Monitoring</span></div></div>
           </div>
-
         </div>
       </div>
 
-      <!-- RRTS -->
       <div id="proj-rrts" class="proj-tab-content">
         <div class="proj-grid">
-
           <div class="proj-card">
             <div class="proj-img-wrap"><span class="proj-status-tag proj-status-completed">Completed</span><div class="proj-img-placeholder"><span class="proj-img-icon">🚄</span></div></div>
             <div class="proj-body"><div class="proj-type">High-Speed · RRTS · Delhi-Meerut</div><div class="proj-name">NCRTC Rapid Rail Transit</div><div class="proj-detail">Strategic planning and execution advisory for India's first high-speed regional rapid transit system, including IGBC Platinum certification support and interface management.</div><div class="proj-tags"><span class="proj-tag">Planning</span><span class="proj-tag">IGBC</span><span class="proj-tag">Interface</span></div></div>
           </div>
-
         </div>
       </div>
 
-      <!-- URBAN & HIGHWAYS -->
       <div id="proj-urban" class="proj-tab-content">
         <div class="proj-grid">
-
           <div class="proj-card">
             <div class="proj-img-wrap"><span class="proj-status-tag proj-status-completed">Completed</span><div class="proj-img-placeholder"><span class="proj-img-icon">🌉</span></div></div>
             <div class="proj-body"><div class="proj-type">Urban Flyover · Delhi</div><div class="proj-name">Barahpulla Elevated Road</div><div class="proj-detail">4 km elevated corridor PMC advisory covering scheduling, QA/QC, contractor coordination, and monthly progress reporting to the client authority.</div><div class="proj-tags"><span class="proj-tag">Elevated Road</span><span class="proj-tag">PMC</span><span class="proj-tag">QA/QC</span><span class="proj-tag">Urban</span></div></div>
           </div>
-
         </div>
       </div>
 
-      <!-- BUILDING -->
       <div id="proj-building" class="proj-tab-content">
         <div class="proj-grid">
-
           <div class="proj-card">
             <div class="proj-img-wrap"><span class="proj-status-tag proj-status-ongoing">Ongoing</span><div class="proj-img-placeholder"><span class="proj-img-icon">🏛️</span></div></div>
             <div class="proj-body"><div class="proj-type">Building Construction · Delhi</div><div class="proj-name">Hindu College Hostel Building</div><div class="proj-detail">Construction of a new hostel building for Hindu College — covering structural works, finishing, MEP coordination, and project management advisory to ensure delivery on time and within budget.</div><div class="proj-tags"><span class="proj-tag">Building</span><span class="proj-tag">PMC</span><span class="proj-tag">Structural</span></div></div>
           </div>
-
         </div>
       </div>
     </div>
@@ -1611,7 +1809,6 @@ footer {
           <div class="form-card">
             <h3>Send an Enquiry</h3>
             <p class="form-sub">We typically respond within one business day. All enquiries are treated with the utmost confidentiality.</p>
-
             <div class="f-row">
               <div class="f-field"><label>First Name *</label><input type="text" id="f_first" placeholder="First name" required></div>
               <div class="f-field"><label>Last Name *</label><input type="text" id="f_last" placeholder="Last name" required></div>
@@ -1632,12 +1829,10 @@ footer {
               </select>
             </div>
             <div class="f-field"><label>Project Brief</label><textarea rows="4" id="f_message" placeholder="Briefly describe your project and requirements..."></textarea></div>
-
             <button class="f-submit" id="submitBtn" onclick="submitEnquiry()">
               <span id="btnText">Submit Enquiry</span>
               <span class="spinner" id="btnSpinner"></span>
             </button>
-
             <div class="form-status" id="formStatus"></div>
           </div>
         </div>
@@ -1652,8 +1847,8 @@ footer {
     <div class="foot-top">
       <div>
         <div style="display:flex;align-items:center;gap:16px;margin-bottom:4px;">
-          <div style="width:72px;height:72px;background:rgba(255,255,255,0.06);border:1.5px dashed rgba(184,137,42,0.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;flex-shrink:0;">
-            <svg width="30" height="30" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <div style="width:64px;height:64px;background:rgba(255,255,255,0.06);border:1.5px dashed rgba(184,137,42,0.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;flex-shrink:0;">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
               <rect x="3" y="7" width="22" height="16" rx="1" stroke="#d4a84b" stroke-width="1.4" fill="none"/>
               <circle cx="10" cy="13" r="2.5" stroke="#d4a84b" stroke-width="1.2" fill="none"/>
               <path d="M3 20 L9 14.5 L13.5 18.5 L18 13 L25 20" stroke="#d4a84b" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
@@ -1700,22 +1895,23 @@ footer {
 
 <button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
 
-<script>
+<!-- Additional responsive CSS for services intro grid -->
+<style>
+@media (max-width: 768px) {
+  .services-intro-grid { grid-template-columns: 1fr !important; gap: 20px !important; margin-bottom: 36px !important; }
+}
+</style>
 
+<script>
 const EMAILJS_PUBLIC_KEY  = 'KNFaN68n0ku2dsdpB';
 const EMAILJS_SERVICE_ID  = 'service_2zqa8sp';
 const EMAILJS_TEMPLATE_ID = 'template_45hoquk';
-
 const RECIPIENT_1 = 'vkbc003@gmail.com';
 
-// ─── EMAILJS INIT ───
 (function() {
-  try {
-    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
-  } catch(e) { console.warn('EmailJS init failed', e); }
+  try { emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY }); } catch(e) { console.warn('EmailJS init failed', e); }
 })();
 
-// ─── FORM SUBMISSION ───
 async function submitEnquiry() {
   const firstName = document.getElementById('f_first').value.trim();
   const lastName  = document.getElementById('f_last').value.trim();
@@ -1724,20 +1920,13 @@ async function submitEnquiry() {
   const org       = document.getElementById('f_org').value.trim();
   const service   = document.getElementById('f_service').value;
   const message   = document.getElementById('f_message').value.trim();
-
   const statusEl  = document.getElementById('formStatus');
   const btn       = document.getElementById('submitBtn');
   const btnText   = document.getElementById('btnText');
   const spinner   = document.getElementById('btnSpinner');
 
-  if (!firstName || !email) {
-    showStatus('error', '⚠️ Please fill in your name and email address before submitting.');
-    return;
-  }
-  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    showStatus('error', '⚠️ Please enter a valid email address.');
-    return;
-  }
+  if (!firstName || !email) { showStatus('error', '⚠️ Please fill in your name and email address before submitting.'); return; }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { showStatus('error', '⚠️ Please enter a valid email address.'); return; }
 
   btn.disabled = true;
   btnText.textContent = 'Sending...';
@@ -1745,39 +1934,28 @@ async function submitEnquiry() {
   showStatus('sending', '📤 Sending your enquiry...');
 
   const templateParams = {
-    from_name:       `${firstName} ${lastName}`,
-    from_email:      email,
-    phone:           phone || 'Not provided',
-    organisation:    org || 'Not provided',
-    service_type:    service || 'Not specified',
-    message:         message || 'No message provided',
+    from_name: `${firstName} ${lastName}`,
+    from_email: email,
+    phone: phone || 'Not provided',
+    organisation: org || 'Not provided',
+    service_type: service || 'Not specified',
+    message: message || 'No message provided',
     submission_time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'full', timeStyle: 'short' }),
   };
 
   try {
-    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
-      ...templateParams,
-      to_email: RECIPIENT_1,
-    });
-
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, { ...templateParams, to_email: RECIPIENT_1 });
     showStatus('success', '✅ Your enquiry has been sent successfully! We will respond within one business day.');
     btnText.textContent = '✓ Enquiry Sent';
     btn.style.background = '#1a6832';
-
     setTimeout(() => {
-      document.getElementById('f_first').value = '';
-      document.getElementById('f_last').value = '';
-      document.getElementById('f_org').value = '';
-      document.getElementById('f_email').value = '';
-      document.getElementById('f_phone').value = '';
+      ['f_first','f_last','f_org','f_email','f_phone','f_message'].forEach(id => document.getElementById(id).value = '');
       document.getElementById('f_service').value = '';
-      document.getElementById('f_message').value = '';
       btnText.textContent = 'Submit Enquiry';
       btn.style.background = '';
       btn.disabled = false;
       spinner.style.display = 'none';
     }, 4000);
-
   } catch (err) {
     console.error('EmailJS error:', err);
     showStatus('error', '❌ There was a problem sending your enquiry. Please try again or call us directly at +91 98117 81409.');
@@ -1803,6 +1981,27 @@ function showPage(id) {
   document.querySelectorAll('.nav-tab').forEach((t, i) => t.classList.toggle('active', pageOrder[i] === id));
   window.scrollTo({ top: 0, behavior: 'smooth' });
 }
+
+// ─── MOBILE NAV ───
+function toggleMobileNav() {
+  const nav = document.getElementById('mobileNav');
+  const ham = document.getElementById('hamburger');
+  const isOpen = nav.classList.contains('open');
+  if (isOpen) { closeMobileNav(); } else {
+    nav.classList.add('open');
+    ham.classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+}
+function closeMobileNav() {
+  document.getElementById('mobileNav').classList.remove('open');
+  document.getElementById('hamburger').classList.remove('open');
+  document.body.style.overflow = '';
+}
+// Close on backdrop tap
+document.getElementById('mobileNav').addEventListener('click', function(e) {
+  if (e.target === this) closeMobileNav();
+});
 
 // ─── HERO SLIDER ───
 let currentSlide = 0;
@@ -1846,8 +2045,6 @@ function switchProjTab(tab, el) {
 window.addEventListener('scroll', () => {
   document.getElementById('scrollTopBtn').classList.toggle('show', window.scrollY > 400);
 });
-
 </script>
-
 </body>
 </html>
