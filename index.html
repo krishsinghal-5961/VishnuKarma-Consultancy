@@ -1,0 +1,1853 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<!-- BUILD: v7 - PPT Modal Removed -->
+<title>Vishnukarma Buildtech & Consultants | Infrastructure PMC</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:ital,wght@0,300;0,400;0,500;0,600;0,700;1,300;1,400&family=Spectral:ital,wght@0,400;0,600;0,700;0,800;1,400;1,600&display=swap" rel="stylesheet">
+<!-- EmailJS SDK -->
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+<style>
+:root {
+  --navy:     #1e3a5f;
+  --navy2:    #2b5080;
+  --blue:     #2563a8;
+  --blue-lt:  #3b82c4;
+  --gold:     #b8892a;
+  --gold-lt:  #d4a84b;
+  --gold-pale:#fdf6e3;
+  --white:    #ffffff;
+  --bg:       #f4f6f9;
+  --bg2:      #e8ecf2;
+  --line:     #d0d7e2;
+  --ink:      #1a2535;
+  --body:     #3d4f62;
+  --muted:    #6b7f95;
+  --shadow:   0 2px 20px rgba(30,58,95,0.07);
+  --shadow-lg:0 8px 40px rgba(30,58,95,0.13);
+  --radius:   0px;
+}
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+html { scroll-behavior: smooth; }
+body {
+  background: var(--bg);
+  color: var(--body);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 15.5px;
+  line-height: 1.75;
+  overflow-x: hidden;
+}
+
+/* ─── TOP BAR ─── */
+.topbar {
+  background: #f0f4f8;
+  padding: 9px 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid var(--line);
+}
+.topbar-left { display: flex; gap: 28px; align-items: center; }
+.topbar-item {
+  font-size: 12px;
+  color: var(--body);
+  display: flex;
+  align-items: center;
+  gap: 7px;
+}
+.topbar-item a { color: var(--body); text-decoration: none; }
+.topbar-item a:hover { color: var(--gold); }
+.topbar-icon { font-size: 13px; }
+.topbar-right { font-size: 11.5px; font-weight: 500; color: var(--navy); letter-spacing: 0.06em; }
+
+/* ─── HEADER ─── */
+header {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background: var(--white);
+  border-bottom: 3px solid var(--gold);
+  box-shadow: 0 2px 16px rgba(30,58,95,0.09);
+}
+.header-inner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 76px;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 40px;
+}
+.logo-wrap {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  cursor: pointer;
+  flex-shrink: 0;
+  text-decoration: none;
+}
+.logo-emblem {
+  width: 52px;
+  height: 52px;
+  flex-shrink: 0;
+  position: relative;
+}
+.logo-text { display: flex; flex-direction: column; line-height: 1.2; }
+.logo-name {
+  font-family: 'Spectral', serif;
+  font-size: 16.5px;
+  font-weight: 700;
+  color: var(--navy);
+  letter-spacing: 0.01em;
+}
+.logo-sub {
+  font-size: 10px;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+  font-weight: 400;
+  margin-top: 1px;
+}
+nav { display: flex; align-items: center; gap: 0; }
+.nav-tab {
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13.5px;
+  font-weight: 400;
+  color: var(--body);
+  padding: 8px 17px;
+  border: none;
+  background: none;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  letter-spacing: 0.01em;
+  margin-top: 3px;
+  position: relative;
+}
+.nav-tab:hover { color: var(--navy); }
+.nav-tab.active { color: var(--navy); border-bottom-color: var(--gold); }
+.nav-cta {
+  margin-left: 20px;
+  font-size: 12.5px;
+  font-weight: 600;
+  letter-spacing: 0.05em;
+  color: var(--white);
+  background: var(--navy);
+  border: none;
+  padding: 10px 22px;
+  cursor: pointer;
+  transition: background 0.2s, transform 0.1s;
+  white-space: nowrap;
+  text-transform: uppercase;
+}
+.nav-cta:hover { background: var(--blue); transform: translateY(-1px); }
+
+/* ─── PAGES ─── */
+.page { display: none; }
+.page.active { display: block; animation: fadeIn 0.35s ease; }
+@keyframes fadeIn { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: translateY(0); } }
+
+/* ─── HERO SLIDER ─── */
+.hero-slider { position: relative; height: 620px; overflow: hidden; }
+.hero-slide {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(130deg, var(--navy) 0%, var(--navy2) 60%, #0f3460 100%);
+  display: flex;
+  align-items: center;
+  opacity: 0;
+  transition: opacity 0.9s ease;
+}
+.hero-slide.active { opacity: 1; z-index: 2; }
+.hero-slide-bg {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  opacity: 0.18;
+}
+.hero-slide-overlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(100deg, rgba(13,43,78,0.92) 40%, rgba(13,43,78,0.5) 100%);
+}
+.hero-content {
+  position: relative;
+  z-index: 3;
+  max-width: 1320px;
+  margin: 0 auto;
+  padding: 0 60px;
+  width: 100%;
+}
+.hero-kicker {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--gold-lt);
+  margin-bottom: 22px;
+}
+.hero-kicker::before { content: ''; display: block; width: 28px; height: 1.5px; background: var(--gold-lt); }
+.hero-h1 {
+  font-family: 'Spectral', serif;
+  font-size: clamp(32px, 4vw, 56px);
+  font-weight: 700;
+  color: var(--white);
+  line-height: 1.2;
+  max-width: 700px;
+  margin-bottom: 22px;
+}
+.hero-h1 em { font-style: italic; color: var(--gold-lt); }
+.hero-p {
+  font-size: 16px;
+  font-weight: 300;
+  color: rgba(255,255,255,0.68);
+  max-width: 520px;
+  line-height: 1.8;
+  margin-bottom: 42px;
+}
+.hero-btns { display: flex; gap: 14px; flex-wrap: wrap; }
+.btn-primary {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--navy);
+  background: var(--gold);
+  border: 2px solid var(--gold);
+  padding: 13px 30px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-primary:hover { background: var(--gold-lt); border-color: var(--gold-lt); transform: translateY(-2px); }
+.btn-outline {
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: transparent;
+  border: 2px solid rgba(255,255,255,0.35);
+  padding: 13px 30px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.btn-outline:hover { border-color: var(--white); background: rgba(255,255,255,0.06); }
+
+.slider-dots {
+  position: absolute;
+  bottom: 28px;
+  left: 60px;
+  z-index: 10;
+  display: flex;
+  gap: 8px;
+}
+.sdot {
+  width: 28px;
+  height: 3px;
+  background: rgba(255,255,255,0.3);
+  cursor: pointer;
+  transition: background 0.3s, width 0.3s;
+}
+.sdot.active { background: var(--gold); width: 48px; }
+
+.stats-band {
+  background: #f0f4fa;
+  border-bottom: 1px solid var(--line);
+  border-top: 1px solid var(--line);
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  box-shadow: var(--shadow);
+  padding: 0 60px;
+}
+.stat-item {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  padding: 28px 40px;
+  flex: 1;
+  border-left: 2px solid transparent;
+  transition: border-color 0.2s, background 0.2s;
+}
+.stat-item:first-child { border-left: 2px solid var(--gold); }
+.stat-item:hover { background: var(--white); border-left-color: var(--gold); }
+.stat-num {
+  font-family: 'Spectral', serif;
+  font-size: 36px;
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+.stat-label {
+  font-size: 11px;
+  font-weight: 500;
+  letter-spacing: 0.05em;
+  text-transform: uppercase;
+  color: var(--muted);
+  line-height: 1.5;
+}
+
+.sectors-bar {
+  background: #eef2f8;
+  padding: 22px 60px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 14px;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+}
+.sectors-bar-label {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.22em;
+  text-transform: uppercase;
+  color: var(--navy);
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.sectors-bar-label::before,
+.sectors-bar-label::after {
+  content: '';
+  display: block;
+  width: 36px;
+  height: 1px;
+  background: var(--gold);
+  opacity: 0.7;
+}
+.sectors-scroll {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.sectors-scroll span {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--navy);
+  background: rgba(255,255,255,0.7);
+  border: 1px solid var(--line);
+  padding: 6px 16px;
+  letter-spacing: 0.03em;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  cursor: default;
+}
+.sectors-scroll span:hover {
+  background: rgba(184,137,42,0.12);
+  border-color: var(--gold);
+  color: var(--gold);
+}
+
+/* ─── LAYOUT ─── */
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 60px; }
+.section { padding: 90px 0; background: var(--bg); }
+.section-alt { background: var(--white); }
+.section-warm { background: #f8f5ef; }
+.section-cool { background: #eef2f8; }
+.section-dark { background: var(--navy); }
+.section-navy2 { background: var(--navy2); }
+
+.section-header { margin-bottom: 52px; }
+.section-header h2 {
+  font-family: 'Spectral', serif;
+  font-size: clamp(28px, 3vw, 42px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.15;
+  margin-bottom: 14px;
+}
+.section-header p { font-size: 15.5px; font-weight: 300; color: var(--body); max-width: 580px; line-height: 1.85; }
+.overline {
+  font-size: 11px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 12px;
+}
+.overline::before { content: ''; display: block; width: 22px; height: 1.5px; background: var(--gold); }
+
+.two-col { display: grid; grid-template-columns: 1.15fr 1fr; gap: 80px; align-items: start; }
+.three-col { display: grid; grid-template-columns: repeat(3,1fr); gap: 32px; }
+
+.about-lead {
+  font-family: 'Spectral', serif;
+  font-size: 19px;
+  font-style: italic;
+  color: var(--navy);
+  line-height: 1.65;
+  border-left: 3px solid var(--gold);
+  padding-left: 22px;
+  margin-bottom: 28px;
+}
+.about-text { font-size: 15px; color: var(--body); line-height: 1.9; margin-bottom: 14px; }
+
+.profile-card {
+  background: var(--white);
+  padding: 40px 36px;
+  position: sticky;
+  top: 92px;
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--gold);
+  box-shadow: var(--shadow);
+}
+.profile-badge {
+  background: var(--navy);
+  color: var(--white);
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  padding: 4px 12px;
+  display: inline-block;
+  margin-bottom: 16px;
+}
+.profile-card-name {
+  font-family: 'Spectral', serif;
+  font-size: 26px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 5px;
+}
+.profile-card-qual { font-size: 12.5px; color: var(--muted); margin-bottom: 24px; line-height: 1.7; }
+.pc-divider { height: 1px; background: var(--line); margin: 18px 0; }
+.pc-row { margin-bottom: 14px; }
+.pc-label { font-size: 10px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 4px; }
+.pc-value { font-size: 13.5px; color: var(--body); line-height: 1.5; }
+.pc-tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 14px; }
+.pc-tag {
+  font-size: 10.5px;
+  font-weight: 500;
+  color: var(--navy);
+  background: var(--bg2);
+  border: 1px solid var(--line);
+  padding: 4px 10px;
+}
+
+.svc-list { margin-top: 36px; }
+.svc-row {
+  display: flex;
+  gap: 20px;
+  padding: 18px 0;
+  border-bottom: 1px solid var(--line);
+  align-items: flex-start;
+  transition: background 0.15s;
+}
+.svc-row:first-child { border-top: 1px solid var(--line); }
+.svc-num { font-size: 11px; font-weight: 700; color: var(--gold); min-width: 22px; padding-top: 3px; letter-spacing: 0.06em; }
+.svc-title { font-size: 15px; font-weight: 600; color: var(--ink); margin-bottom: 3px; }
+.svc-desc { font-size: 13px; color: var(--muted); line-height: 1.6; }
+
+.why-grid { display: grid; grid-template-columns: repeat(4,1fr); gap: 16px; }
+.why-card {
+  background: #fdf9f2;
+  padding: 36px 28px;
+  border: 1px solid #e8dfc8;
+  border-top: 3px solid var(--gold);
+  transition: border-top-color 0.25s, transform 0.25s, box-shadow 0.25s;
+}
+.why-card:hover { border-top-color: var(--navy); transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.why-icon { font-size: 32px; margin-bottom: 16px; display: block; }
+.why-title { font-family: 'Spectral', serif; font-size: 18px; font-weight: 700; color: var(--navy); margin-bottom: 10px; }
+.why-desc { font-size: 13.5px; color: var(--body); line-height: 1.75; }
+
+.proj-tabs { display: flex; gap: 0; border-bottom: 1px solid var(--line); margin-bottom: 40px; }
+.proj-tab {
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--muted);
+  padding: 11px 22px;
+  cursor: pointer;
+  border-bottom: 3px solid transparent;
+  transition: color 0.2s, border-color 0.2s;
+  white-space: nowrap;
+  letter-spacing: 0.02em;
+  background: none;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+}
+.proj-tab.active { color: var(--navy); border-bottom-color: var(--gold); }
+.proj-tab:hover { color: var(--ink); }
+.proj-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.proj-tab-content { display: none; }
+.proj-tab-content.active { display: block; }
+.proj-card {
+  background: #f7f9fc;
+  overflow: hidden;
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--gold);
+  transition: border-top-color 0.25s, box-shadow 0.25s;
+}
+.proj-card:hover { border-top-color: var(--navy); box-shadow: var(--shadow-lg); }
+.proj-img-wrap {
+  width: 100%;
+  height: 200px;
+  background: var(--bg2);
+  position: relative;
+  overflow: hidden;
+}
+.proj-img-placeholder {
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background: linear-gradient(135deg, var(--bg2) 0%, var(--line) 100%);
+  border: 2px dashed rgba(184,137,42,0.3);
+}
+.proj-img-icon { font-size: 30px; margin-bottom: 8px; opacity: 0.45; }
+.proj-img-hint { font-size: 11px; color: var(--muted); letter-spacing: 0.08em; }
+.proj-body { padding: 22px 24px 24px; }
+.proj-type { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); margin-bottom: 8px; }
+.proj-name { font-family: 'Spectral', serif; font-size: 19px; font-weight: 700; color: var(--navy); margin-bottom: 8px; line-height: 1.25; }
+.proj-detail { font-size: 13px; color: var(--body); line-height: 1.75; }
+.proj-tags { display: flex; flex-wrap: wrap; gap: 5px; margin-top: 14px; }
+.proj-tag { font-size: 10.5px; font-weight: 500; color: var(--blue); background: #eaf1f9; border: 1px solid #ccdcee; padding: 3px 9px; }
+
+.testimonials-section { background: #f7f4ef; padding: 90px 0; border-top: 1px solid #e8dfc8; border-bottom: 1px solid #e8dfc8; }
+.testi-wrapper { position: relative; max-width: 900px; margin: 0 auto; }
+.testi-slide {
+  display: none;
+  text-align: center;
+  animation: fadeIn 0.6s ease;
+}
+.testi-slide.active { display: block; }
+.testi-quote {
+  font-family: 'Spectral', serif;
+  font-size: clamp(17px, 2vw, 22px);
+  font-style: italic;
+  color: var(--navy);
+  line-height: 1.75;
+  margin-bottom: 36px;
+  position: relative;
+  padding: 0 40px;
+}
+.testi-quote::before {
+  content: '\201C';
+  font-size: 80px;
+  color: var(--gold);
+  opacity: 0.2;
+  position: absolute;
+  top: -20px;
+  left: 0;
+  line-height: 1;
+  font-family: 'Spectral', serif;
+}
+.testi-author-wrap { display: flex; flex-direction: column; align-items: center; gap: 14px; }
+.testi-name { font-size: 15px; font-weight: 600; color: var(--navy); }
+.testi-role { font-size: 12px; color: var(--gold); letter-spacing: 0.08em; }
+.testi-org { font-size: 12px; color: var(--muted); }
+.testi-controls { display: flex; justify-content: center; align-items: center; gap: 14px; margin-top: 40px; }
+.testi-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--line);
+  cursor: pointer;
+  border: none;
+  transition: background 0.3s, transform 0.3s;
+}
+.testi-dot.active { background: var(--gold); transform: scale(1.3); }
+.testi-arr {
+  background: none;
+  border: 1px solid var(--line);
+  color: var(--muted);
+  width: 36px;
+  height: 36px;
+  cursor: pointer;
+  font-size: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s;
+}
+.testi-arr:hover { border-color: var(--navy); color: var(--navy); }
+
+.page-hero {
+  background: var(--bg2);
+  padding: 72px 60px 64px;
+  border-bottom: 3px solid var(--gold);
+  position: relative;
+  overflow: hidden;
+}
+.page-hero::after {
+  content: '';
+  position: absolute;
+  right: 0; top: 0; bottom: 0;
+  width: 30%;
+  background: linear-gradient(160deg, rgba(184,137,42,0.08) 0%, rgba(30,58,95,0.04) 100%);
+  clip-path: polygon(12% 0, 100% 0, 100% 100%, 0% 100%);
+}
+.page-hero-inner { max-width: 1320px; margin: 0 auto; position: relative; z-index: 2; }
+.page-hero h1 {
+  font-family: 'Spectral', serif;
+  font-size: clamp(34px, 4.2vw, 56px);
+  font-weight: 700;
+  color: var(--navy);
+  line-height: 1.12;
+  margin-top: 14px;
+}
+.breadcrumb { display: flex; align-items: center; gap: 8px; }
+.bc-item { font-size: 12px; color: var(--muted); cursor: pointer; }
+.bc-item:hover { color: var(--gold); }
+.bc-sep { font-size: 12px; color: var(--navy2); opacity: 0.35; }
+.bc-current { font-size: 12px; color: var(--gold); font-weight: 500; }
+
+.strength-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: 32px; }
+.strength-card {
+  background: #fdf9f2;
+  border: 1px solid #e8dfc8;
+  border-left: 3px solid var(--gold);
+  padding: 20px 22px;
+  transition: background 0.2s;
+}
+.strength-card:hover { background: var(--gold-pale); }
+.strength-title { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 4px; }
+.strength-desc { font-size: 12.5px; color: var(--muted); line-height: 1.55; }
+
+.sidebar-card {
+  background: #f4f7fc;
+  border: 1px solid #d4dcea;
+  padding: 26px 24px;
+  margin-bottom: 12px;
+}
+.sc-head {
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--navy);
+  margin-bottom: 14px;
+  padding-bottom: 10px;
+  border-bottom: 2px solid var(--gold);
+}
+.sc-list { list-style: none; }
+.sc-list li {
+  font-size: 13.5px;
+  color: var(--ink);
+  padding: 7px 0 7px 16px;
+  border-bottom: 1px solid var(--line);
+  position: relative;
+  line-height: 1.45;
+}
+.sc-list li::before { content: ''; position: absolute; left: 0; top: 14px; width: 5px; height: 1.5px; background: var(--gold); }
+.sc-list li:last-child { border-bottom: none; }
+
+.team-grid-extended {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-top: 40px;
+}
+.team-member-card {
+  background: #f4f7fc;
+  border: 1px solid #d4dcea;
+  border-top: 3px solid var(--gold);
+  transition: border-top-color 0.25s, box-shadow 0.2s, background 0.2s;
+  overflow: hidden;
+}
+.team-member-card:hover {
+  border-top-color: var(--navy);
+  box-shadow: var(--shadow-lg);
+  background: var(--white);
+}
+.team-member-photo {
+  width: 100%;
+  height: 180px;
+  background: var(--bg2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 48px;
+  color: var(--muted);
+  border-bottom: 1px solid var(--line);
+}
+.team-member-body { padding: 20px 22px 24px; }
+.team-member-role {
+  font-size: 10px;
+  font-weight: 700;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--gold);
+  margin-bottom: 6px;
+}
+.team-member-name {
+  font-family: 'Spectral', serif;
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 4px;
+}
+.team-member-qual {
+  font-size: 12px;
+  color: var(--muted);
+  margin-bottom: 12px;
+  line-height: 1.5;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 12px;
+}
+.team-member-desc { font-size: 13px; color: var(--body); line-height: 1.75; }
+
+.cred-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 16px; margin-top: 40px; }
+.cred-card {
+  background: #fdf9f2;
+  padding: 32px 24px;
+  text-align: center;
+  border: 1px solid #e8dfc8;
+  border-top: 3px solid var(--gold);
+  transition: border-top-color 0.25s, transform 0.2s, box-shadow 0.2s;
+}
+.cred-card:hover { border-top-color: var(--navy); transform: translateY(-3px); box-shadow: var(--shadow-lg); }
+.cred-icon { font-size: 32px; margin-bottom: 14px; display: block; }
+.cred-name { font-size: 14px; font-weight: 600; color: var(--navy); margin-bottom: 5px; }
+.cred-sub { font-size: 12px; color: var(--muted); line-height: 1.5; }
+
+.clients-band { background: #faf6ee; padding: 52px 60px; border-top: 1px solid #e8dfc8; border-bottom: 1px solid #e8dfc8; }
+.clients-label { font-size: 11px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--navy); text-align: center; margin-bottom: 32px; }
+.clients-row { display: flex; justify-content: center; align-items: center; gap: 12px; flex-wrap: wrap; }
+.client-item {
+  font-family: 'Spectral', serif;
+  font-size: 13.5px;
+  font-weight: 700;
+  color: var(--navy);
+  background: var(--white);
+  border: 1px solid #e0d4b8;
+  border-bottom: 2px solid var(--gold);
+  padding: 10px 20px;
+  letter-spacing: 0.04em;
+  transition: border-bottom-color 0.2s, background 0.2s, transform 0.15s, box-shadow 0.15s;
+  white-space: nowrap;
+  box-shadow: 0 2px 8px rgba(184,137,42,0.08);
+}
+.client-item:hover { border-bottom-color: var(--navy); background: var(--gold-pale); transform: translateY(-2px); box-shadow: 0 6px 20px rgba(184,137,42,0.15); }
+
+.srv-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 18px; }
+.srv-card {
+  background: #f8f9fc;
+  padding: 36px 32px;
+  border: 1px solid #d4dcea;
+  border-left: 4px solid var(--gold);
+  transition: border-left-color 0.2s, box-shadow 0.2s, background 0.2s;
+}
+.srv-card:hover { border-left-color: var(--navy); box-shadow: var(--shadow-lg); background: var(--white); }
+.srv-num { font-size: 11px; font-weight: 700; color: var(--gold); margin-bottom: 12px; letter-spacing: 0.1em; }
+.srv-title { font-family: 'Spectral', serif; font-size: 20px; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.2; }
+.srv-desc { font-size: 13.5px; color: var(--body); line-height: 1.8; margin-bottom: 16px; }
+.srv-pts { list-style: none; }
+.srv-pts li { font-size: 13px; color: var(--ink); padding: 5px 0 5px 18px; border-bottom: 1px solid var(--line); position: relative; line-height: 1.5; }
+.srv-pts li:last-child { border-bottom: none; }
+.srv-pts li::before { content: ''; position: absolute; left: 0; top: 12px; width: 7px; height: 1.5px; background: var(--gold); }
+
+.method-section { background: #1a2f4a; padding: 80px 0; margin-top: 60px; }
+.method-section .overline { color: var(--gold-lt); }
+.method-section .overline::before { background: var(--gold-lt); }
+.method-section h2 { color: var(--white) !important; }
+.method-section p { color: rgba(255,255,255,0.55) !important; }
+.method-steps { display: grid; grid-template-columns: repeat(5, 1fr); gap: 0; margin-top: 48px; }
+.method-step {
+  padding: 32px 22px;
+  border-right: 1px solid rgba(255,255,255,0.08);
+  text-align: center;
+  transition: background 0.2s, box-shadow 0.2s;
+}
+.method-step:hover { background: rgba(255,255,255,0.05); box-shadow: inset 0 -3px 0 var(--gold); }
+.method-step:last-child { border-right: none; }
+.step-n { font-family: 'Spectral', serif; font-size: 46px; font-weight: 700; color: rgba(212,168,75,0.2); line-height: 1; display: block; margin-bottom: 12px; }
+.step-t { font-size: 14px; font-weight: 600; color: var(--white); margin-bottom: 10px; line-height: 1.35; }
+.step-d { font-size: 12px; color: rgba(255,255,255,0.5); line-height: 1.65; }
+
+.exp-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 18px; }
+.exp-card {
+  background: #f4f7fc;
+  padding: 30px 28px;
+  border: 1px solid #d4dcea;
+  border-left: 4px solid var(--gold);
+  transition: border-left-color 0.25s, box-shadow 0.25s, background 0.25s;
+}
+.exp-card:hover { border-left-color: var(--navy); box-shadow: var(--shadow-lg); background: var(--white); }
+.exp-icon { font-size: 28px; margin-bottom: 14px; display: block; }
+.exp-title { font-family: 'Spectral', serif; font-size: 17.5px; font-weight: 700; color: var(--navy); margin-bottom: 10px; line-height: 1.3; }
+.exp-body { font-size: 13.5px; color: var(--body); line-height: 1.8; }
+
+.profile-split { display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: start; }
+.pstat-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; margin-bottom: 14px; }
+.pstat {
+  background: #fdf9f2;
+  border: 1px solid #e8dfc8;
+  border-top: 3px solid var(--gold);
+  padding: 24px 20px;
+  transition: border-top-color 0.2s, box-shadow 0.2s;
+}
+.pstat:hover { border-top-color: var(--navy); box-shadow: var(--shadow); }
+.ps-n { font-family: 'Spectral', serif; font-size: 38px; font-weight: 700; color: var(--navy); line-height: 1; }
+.ps-l { font-size: 12px; color: var(--muted); margin-top: 6px; line-height: 1.4; }
+
+/* ─── CONTACT ─── */
+.contact-split { display: grid; grid-template-columns: 1fr 1.2fr; gap: 80px; align-items: start; }
+.ci-block { margin-bottom: 30px; }
+.ci-label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.16em; text-transform: uppercase; color: var(--muted); margin-bottom: 5px; }
+.ci-value { font-size: 15px; color: var(--ink); line-height: 1.65; }
+.ci-value a { color: var(--blue); text-decoration: none; }
+.ci-value a:hover { text-decoration: underline; }
+.contact-info-card {
+  background: #fdf9f2;
+  padding: 40px;
+  border: 1px solid #e8dfc8;
+  border-top: 4px solid var(--gold);
+  margin-bottom: 24px;
+}
+.contact-info-card .ci-label { color: var(--gold); }
+
+.form-card {
+  background: var(--white);
+  border: 1px solid var(--line);
+  border-top: 4px solid var(--gold);
+  padding: 48px 44px;
+  box-shadow: var(--shadow-lg);
+}
+.form-card h3 {
+  font-family: 'Spectral', serif;
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 5px;
+}
+.form-sub { font-size: 13.5px; color: var(--muted); margin-bottom: 30px; line-height: 1.6; }
+.f-row { display: grid; grid-template-columns: 1fr 1fr; gap: 14px; }
+.f-field { display: flex; flex-direction: column; gap: 5px; margin-bottom: 16px; }
+.f-field label { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--muted); }
+.f-field input, .f-field textarea, .f-field select {
+  background: var(--bg);
+  border: 1px solid var(--line);
+  color: var(--ink);
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 14px;
+  padding: 11px 14px;
+  outline: none;
+  transition: border-color 0.2s, background 0.2s;
+  resize: none;
+  -webkit-appearance: none;
+}
+.f-field input:focus, .f-field textarea:focus, .f-field select:focus { border-color: var(--navy); background: var(--white); }
+.f-submit {
+  width: 100%;
+  font-family: 'IBM Plex Sans', sans-serif;
+  font-size: 13.5px;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--white);
+  background: var(--blue);
+  border: none;
+  padding: 15px;
+  cursor: pointer;
+  margin-top: 4px;
+  transition: background 0.2s, transform 0.1s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+.f-submit:hover:not(:disabled) { background: var(--navy); transform: translateY(-1px); }
+.f-submit:disabled { opacity: 0.7; cursor: not-allowed; transform: none; }
+
+/* ─── FORM STATUS MESSAGES ─── */
+.form-status {
+  display: none;
+  padding: 16px 20px;
+  margin-top: 16px;
+  font-size: 14px;
+  font-weight: 500;
+  border-left: 4px solid;
+  animation: fadeIn 0.3s ease;
+}
+.form-status.success {
+  display: block;
+  background: #f0faf4;
+  border-color: #1a6832;
+  color: #1a6832;
+}
+.form-status.error {
+  display: block;
+  background: #fef2f2;
+  border-color: #dc2626;
+  color: #dc2626;
+}
+.form-status.sending {
+  display: block;
+  background: #f0f4fa;
+  border-color: var(--navy);
+  color: var(--navy);
+}
+
+/* Spinner */
+.spinner {
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(255,255,255,0.4);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.7s linear infinite;
+  display: none;
+}
+@keyframes spin { to { transform: rotate(360deg); } }
+
+footer {
+  background: var(--navy);
+  border-top: 3px solid var(--gold);
+  padding: 64px 0 28px;
+}
+.foot-inner { max-width: 1320px; margin: 0 auto; padding: 0 60px; }
+.foot-top {
+  display: grid;
+  grid-template-columns: 2.2fr 1fr 1fr 1fr;
+  gap: 60px;
+  padding-bottom: 44px;
+  border-bottom: 1px solid rgba(255,255,255,0.09);
+  margin-bottom: 28px;
+}
+.foot-brand-desc { font-size: 13px; color: rgba(255,255,255,0.38); line-height: 1.85; margin-top: 16px; max-width: 300px; }
+.foot-col-h { font-size: 10.5px; font-weight: 700; letter-spacing: 0.14em; text-transform: uppercase; color: var(--gold-lt); margin-bottom: 18px; }
+.foot-links { list-style: none; }
+.foot-links li { font-size: 13.5px; color: rgba(255,255,255,0.45); padding: 7px 0; cursor: pointer; transition: color 0.2s; border-bottom: 1px solid rgba(255,255,255,0.05); }
+.foot-links li:hover { color: var(--gold-lt); padding-left: 4px; transition: padding 0.2s, color 0.2s; }
+.foot-links li:last-child { border-bottom: none; }
+.foot-bottom { display: flex; justify-content: space-between; align-items: center; }
+.foot-copy { font-size: 12px; color: rgba(255,255,255,0.25); }
+.foot-right { font-size: 12px; color: rgba(255,255,255,0.2); }
+
+.mt-8{margin-top:8px}.mt-16{margin-top:16px}.mt-24{margin-top:24px}.mt-32{margin-top:32px}.mt-40{margin-top:40px}.mt-48{margin-top:48px}
+.mb-0{margin-bottom:0}
+.divider { height: 1px; background: var(--line); margin: 40px 0; }
+.gold-bar { width: 48px; height: 3px; background: var(--gold); margin-bottom: 24px; }
+
+.proj-status-tag {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  font-size: 10.5px;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 4px 11px;
+  z-index: 5;
+  border-radius: 2px;
+}
+.proj-status-ongoing { background: #e65c00; color: #fff; }
+.proj-status-completed { background: #1a6832; color: #fff; }
+
+.hero-pattern {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  overflow: hidden;
+  pointer-events: none;
+}
+.hero-pattern svg { width: 100%; height: 100%; opacity: 0.13; }
+
+.scroll-top {
+  position: fixed;
+  bottom: 32px;
+  right: 32px;
+  width: 44px;
+  height: 44px;
+  background: var(--white);
+  border: 2px solid var(--navy);
+  color: var(--navy);
+  font-size: 18px;
+  cursor: pointer;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  z-index: 999;
+  transition: background 0.2s;
+}
+.scroll-top:hover { background: var(--gold); color: var(--navy); }
+.scroll-top.show { display: flex; }
+</style>
+</head>
+<body>
+
+<!-- ══ TOP BAR ══ -->
+<div class="topbar">
+  <div class="topbar-left">
+    <div class="topbar-item"><span class="topbar-icon">📞</span><a href="tel:+919811781409">+91 98117 81409</a></div>
+    <div class="topbar-item"><span class="topbar-icon">📍</span> I.P. Extension, Patparganj, Delhi – 110092</div>
+    <div class="topbar-item"><span class="topbar-icon">🕐</span> Mon – Sat &nbsp;·&nbsp; Pan-India Engagements</div>
+  </div>
+  <div class="topbar-right">Specialist Infrastructure PMC · Delhi NCR</div>
+</div>
+
+<!-- ══ HEADER ══ -->
+<header>
+  <div class="header-inner">
+    <div class="logo-wrap" onclick="showPage('home')">
+      <div class="logo-emblem" style="width:56px;height:56px;background:var(--bg2);display:flex;align-items:center;justify-content:center;flex-shrink:0;">
+        <svg width="28" height="28" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <rect x="3" y="7" width="22" height="16" rx="1" stroke="#b8892a" stroke-width="1.4" fill="none"/>
+          <circle cx="10" cy="13" r="2.5" stroke="#b8892a" stroke-width="1.2" fill="none"/>
+          <path d="M3 20 L9 14.5 L13.5 18.5 L18 13 L25 20" stroke="#b8892a" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+          <path d="M12 7 L14 4 L16 7" stroke="#d4a84b" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+        </svg>
+      </div>
+      <div class="logo-text">
+        <span class="logo-name">Vishnukarma Buildtech &amp; Consultants</span>
+        <span class="logo-sub">Infrastructure PMC Consultants</span>
+      </div>
+    </div>
+    <nav>
+      <button class="nav-tab active" onclick="showPage('home')">Home</button>
+      <button class="nav-tab" onclick="showPage('about')">About Us</button>
+      <button class="nav-tab" onclick="showPage('services')">Services</button>
+      <button class="nav-tab" onclick="showPage('expertise')">Expertise</button>
+      <button class="nav-tab" onclick="showPage('projects')">Projects</button>
+    </nav>
+    <button class="nav-cta" onclick="showPage('contact')">Get in Touch</button>
+  </div>
+</header>
+
+<!-- ══ HOME ══ -->
+<div id="page-home" class="page active">
+
+  <div class="hero-slider" id="heroSlider">
+    <div class="hero-slide active">
+      <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1541888946425-d81bb19240f5?w=1600&q=80')"></div>
+      <div class="hero-slide-overlay"></div>
+      <div class="hero-pattern">
+        <svg viewBox="0 0 1400 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="#d4a84b" stroke-width="0.8">
+            <line x1="-100" y1="0" x2="500" y2="620"/><line x1="100" y1="0" x2="700" y2="620"/><line x1="300" y1="0" x2="900" y2="620"/>
+            <line x1="500" y1="0" x2="1100" y2="620"/><line x1="700" y1="0" x2="1300" y2="620"/><line x1="900" y1="0" x2="1500" y2="620"/>
+            <line x1="1100" y1="0" x2="1700" y2="620"/><line x1="1300" y1="0" x2="1900" y2="620"/>
+            <line x1="500" y1="0" x2="-100" y2="620"/><line x1="700" y1="0" x2="100" y2="620"/><line x1="900" y1="0" x2="300" y2="620"/>
+            <line x1="1100" y1="0" x2="500" y2="620"/><line x1="1300" y1="0" x2="700" y2="620"/><line x1="1500" y1="0" x2="900" y2="620"/>
+          </g>
+          <g fill="#d4a84b" opacity="0.6">
+            <rect x="296" y="306" width="8" height="8" transform="rotate(45 300 310)"/>
+            <rect x="596" y="156" width="8" height="8" transform="rotate(45 600 160)"/>
+            <rect x="596" y="456" width="8" height="8" transform="rotate(45 600 460)"/>
+            <rect x="896" y="306" width="8" height="8" transform="rotate(45 900 310)"/>
+            <rect x="1196" y="156" width="8" height="8" transform="rotate(45 1200 160)"/>
+            <rect x="1196" y="456" width="8" height="8" transform="rotate(45 1200 460)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="hero-content">
+        <div class="hero-kicker">Project Management Consultancy</div>
+        <h1 class="hero-h1">Engineering <em>Precision</em> into Every Infrastructure Project</h1>
+        <p class="hero-p">Specialist PMC consultancy for metro rail, RRTS, and large-scale civil infrastructure — from baseline scheduling to contract claims advisory.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="showPage('services')">Explore Services</button>
+          <button class="btn-outline" onclick="showPage('about')">About the Firm</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-slide">
+      <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80')"></div>
+      <div class="hero-slide-overlay"></div>
+      <div class="hero-pattern">
+        <svg viewBox="0 0 1400 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="#d4a84b" stroke-width="0.8">
+            <line x1="-100" y1="0" x2="500" y2="620"/><line x1="300" y1="0" x2="900" y2="620"/><line x1="700" y1="0" x2="1300" y2="620"/>
+            <line x1="1100" y1="0" x2="1700" y2="620"/><line x1="500" y1="0" x2="-100" y2="620"/><line x1="900" y1="0" x2="300" y2="620"/>
+            <line x1="1300" y1="0" x2="700" y2="620"/>
+          </g>
+          <g fill="#d4a84b" opacity="0.6">
+            <rect x="596" y="156" width="8" height="8" transform="rotate(45 600 160)"/>
+            <rect x="896" y="306" width="8" height="8" transform="rotate(45 900 310)"/>
+            <rect x="1196" y="456" width="8" height="8" transform="rotate(45 1200 460)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="hero-content">
+        <div class="hero-kicker">Metro Rail &amp; RRTS</div>
+        <h1 class="hero-h1">Decades of <em>Metro &amp; Transit</em> Project Excellence</h1>
+        <p class="hero-p">Senior-level advisory for DMRC, CMRL, NCRTC, and MMRCL — underground, elevated, and high-speed corridors across India.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="showPage('expertise')">Our Expertise</button>
+          <button class="btn-outline" onclick="showPage('projects')">View Projects</button>
+        </div>
+      </div>
+    </div>
+    <div class="hero-slide">
+      <div class="hero-slide-bg" style="background-image:url('https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=1600&q=80')"></div>
+      <div class="hero-slide-overlay"></div>
+      <div class="hero-pattern">
+        <svg viewBox="0 0 1400 620" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+          <g fill="none" stroke="#d4a84b" stroke-width="0.8">
+            <line x1="100" y1="0" x2="700" y2="620"/><line x1="500" y1="0" x2="1100" y2="620"/><line x1="900" y1="0" x2="1500" y2="620"/>
+            <line x1="700" y1="0" x2="100" y2="620"/><line x1="1100" y1="0" x2="500" y2="620"/>
+          </g>
+          <g fill="#d4a84b" opacity="0.6">
+            <rect x="296" y="306" width="8" height="8" transform="rotate(45 300 310)"/>
+            <rect x="1196" y="156" width="8" height="8" transform="rotate(45 1200 160)"/>
+          </g>
+        </svg>
+      </div>
+      <div class="hero-content">
+        <div class="hero-kicker">Contract &amp; Claims Advisory</div>
+        <h1 class="hero-h1">Protecting Your <em>Contractual</em> Interests at Every Stage</h1>
+        <p class="hero-p">Expert EOT claims preparation, delay analysis, and commercial dispute resolution on FIDIC contracts — with a proven track record.</p>
+        <div class="hero-btns">
+          <button class="btn-primary" onclick="showPage('services')">Claims Services</button>
+          <button class="btn-outline" onclick="showPage('contact')">Consult With Us</button>
+        </div>
+      </div>
+    </div>
+    <div class="slider-dots" id="sliderDots">
+      <div class="sdot active" onclick="goSlide(0)"></div>
+      <div class="sdot" onclick="goSlide(1)"></div>
+      <div class="sdot" onclick="goSlide(2)"></div>
+    </div>
+  </div>
+
+  <div class="stats-band">
+    <div class="stat-item"><span class="stat-num">23+</span><div class="stat-label">Years of Experience</div></div>
+    <div class="stat-item"><span class="stat-num">6+</span><div class="stat-label">Transit Projects</div></div>
+    <div class="stat-item"><span class="stat-num">6</span><div class="stat-label">Core Disciplines</div></div>
+    <div class="stat-item"><span class="stat-num">4+</span><div class="stat-label">Major Metro Networks</div></div>
+    <div class="stat-item"><span class="stat-num">Pan&#8209;India</span><div class="stat-label">Project Footprint</div></div>
+  </div>
+
+  <div class="sectors-bar">
+    <span class="sectors-bar-label">Sectors</span>
+    <div class="sectors-scroll">
+      <span>Metro Rail</span><span>RRTS Corridors</span><span>Underground Tunnelling</span>
+      <span>Elevated Viaducts</span><span>Urban Infrastructure</span><span>Highways &amp; Flyovers</span>
+    </div>
+  </div>
+
+  <div class="section" style="background:#f4f6f9;">
+    <div class="wrap">
+      <div class="two-col">
+        <div>
+          <div class="overline">Who We Are</div>
+          <div class="section-header mb-0">
+            <h2>A Multidisciplinary Engineering &amp; PMC Firm</h2>
+            <p class="mt-16">M/s Vishnukarma Buildtech &amp; Consultants is a specialized engineering and project management consultancy bringing institutional discipline and hands-on field expertise to India's most demanding infrastructure sectors.</p>
+          </div>
+          <div class="divider"></div>
+          <div class="svc-list">
+            <div class="svc-row"><span class="svc-num">01</span><div><div class="svc-title">Pre Tender &amp; Post Tender Works</div><div class="svc-desc">Technical evaluation, project planning, budget preparation, and cost control measures from bid stage through execution.</div></div></div>
+            <div class="svc-row"><span class="svc-num">02</span><div><div class="svc-title">Contract Administration</div><div class="svc-desc">BOQ reviews, bill certification, variations, EOT claims and contractual correspondence.</div></div></div>
+            <div class="svc-row"><span class="svc-num">03</span><div><div class="svc-title">Cost &amp; Commercial Control</div><div class="svc-desc">Pre-tender analysis, budget management, earned value monitoring and financial reporting.</div></div></div>
+            <div class="svc-row"><span class="svc-num">04</span><div><div class="svc-title">Claims &amp; EOT Advisory</div><div class="svc-desc">Specialist delay analysis, prolongation costs, and contractual dispute resolution.</div></div></div>
+            <div class="svc-row"><span class="svc-num">05</span><div><div class="svc-title">Risk Management</div><div class="svc-desc">Proactive risk identification, delay analysis, and project recovery planning.</div></div></div>
+          </div>
+          <button class="btn-primary mt-32" onclick="showPage('services')">View All Services</button>
+        </div>
+        <div>
+          <div class="profile-card">
+            <div class="profile-badge">Owner &amp; Principal Consultant</div>
+            <div style="width:100%;height:200px;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:72px;margin-bottom:22px;">👤</div>
+            <div class="profile-card-name">Shalabh Gupta</div>
+            <div class="profile-card-qual">B.E. Civil &nbsp;·&nbsp; M.Tech Transportation Engineering &nbsp;·&nbsp; Chartered Engineer (IEI) &nbsp;·&nbsp; Primavera P6 Certified</div>
+            <div class="pc-divider"></div>
+            <div class="pc-row"><div class="pc-label">Firm</div><div class="pc-value">M/s Vishnukarma Buildtech &amp; Consultants</div></div>
+            <div class="pc-row"><div class="pc-label">Specialisation</div><div class="pc-value">Metro Rail, RRTS, Underground &amp; Elevated Infrastructure</div></div>
+            <div class="pc-row"><div class="pc-label">Location</div><div class="pc-value">Delhi NCR &nbsp;·&nbsp; Pan-India Engagements</div></div>
+            <div class="pc-divider"></div>
+            <div class="pc-label">Tools &amp; Platforms</div>
+            <div class="pc-tags">
+              <span class="pc-tag">Primavera P6</span><span class="pc-tag">MS Project</span><span class="pc-tag">TILOS</span>
+              <span class="pc-tag">BIM 5D</span><span class="pc-tag">IGBC</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section" style="background:#eef3fa;">
+    <div class="wrap">
+      <div class="overline">Why Choose Us</div>
+      <div class="section-header">
+        <h2>What Sets Us Apart</h2>
+        <p>We combine the rigour of large-scale institutional consultancy with the agility and personal accountability of a specialist firm.</p>
+      </div>
+      <div class="why-grid">
+        <div class="why-card"><span class="why-icon">🏗️</span><div class="why-title">Technical Rigour</div><div class="why-desc">Deep expertise across civil, structural and systems disciplines — earned through 23+ years of hands-on project delivery.</div></div>
+        <div class="why-card"><span class="why-icon">📋</span><div class="why-title">Contractual Acumen</div><div class="why-desc">Strong command of FIDIC and Indian contract conditions — from administration to claims preparation and dispute advisory.</div></div>
+        <div class="why-card"><span class="why-icon">📊</span><div class="why-title">Schedule Mastery</div><div class="why-desc">Advanced programming in Primavera P6, MS Project and TILOS — with proven expertise in baseline control and delay analysis.</div></div>
+        <div class="why-card"><span class="why-icon">🤝</span><div class="why-title">Client-First Focus</div><div class="why-desc">Every mandate is approached as a long-term partnership — our success is defined entirely by the success of your project.</div></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="clients-band">
+    <div class="clients-label">Organizations We Have Supported</div>
+    <div class="clients-row">
+      <span class="client-item">DMRC</span><span class="client-item">NCRTC</span><span class="client-item">CMRL</span>
+      <span class="client-item">MMRCL</span><span class="client-item">SUCG Infrastructure</span>
+      <span class="client-item">L&amp;T-SUCG JV</span><span class="client-item">Ayesa-Geodata-Aarvee JV</span>
+    </div>
+  </div>
+
+  <div class="testimonials-section">
+    <div class="wrap">
+      <div style="text-align:center;margin-bottom:48px">
+        <div class="overline" style="justify-content:center">Client Testimonials</div>
+        <h2 style="font-family:'Spectral', serif;font-size:clamp(26px,3vw,40px);color:var(--navy);font-weight:700;">What Our Clients Say</h2>
+      </div>
+      <div class="testi-wrapper">
+        <div class="testi-slide active" id="testi-0">
+          <div class="testi-quote">Shalabh's expertise in scheduling and contract management was invaluable. His attention to detail in EOT claims preparation helped us navigate a very complex contractual situation with great success.</div>
+          <div class="testi-author-wrap">
+            <div style="width:72px;height:72px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">👤</div>
+            <div><div class="testi-name">Industry Professional</div><div class="testi-role">Senior Project Manager</div><div class="testi-org">DMRC Package Contractor</div></div>
+          </div>
+        </div>
+        <div class="testi-slide" id="testi-1">
+          <div class="testi-quote">A deeply professional and technically sound consultant. The planning and monitoring frameworks implemented on our NCRTC package were exemplary — and consistently delivered above expectations.</div>
+          <div class="testi-author-wrap">
+            <div style="width:72px;height:72px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">👤</div>
+            <div><div class="testi-name">Industry Professional</div><div class="testi-role">Director – Engineering</div><div class="testi-org">NCRTC Contract Package</div></div>
+          </div>
+        </div>
+        <div class="testi-slide" id="testi-2">
+          <div class="testi-quote">The level of understanding of underground metro construction challenges, combined with robust contractual knowledge, makes Vishnukarma Buildtech a rare and valued consulting partner.</div>
+          <div class="testi-author-wrap">
+            <div style="width:72px;height:72px;border-radius:50%;background:var(--bg2);display:flex;align-items:center;justify-content:center;font-size:26px;flex-shrink:0;">👤</div>
+            <div><div class="testi-name">Industry Professional</div><div class="testi-role">Project Director</div><div class="testi-org">CMRL Underground Package</div></div>
+          </div>
+        </div>
+        <div class="testi-controls">
+          <button class="testi-arr" onclick="prevTesti()">&#8592;</button>
+          <button class="testi-dot active" onclick="goTesti(0)"></button>
+          <button class="testi-dot" onclick="goTesti(1)"></button>
+          <button class="testi-dot" onclick="goTesti(2)"></button>
+          <button class="testi-arr" onclick="nextTesti()">&#8594;</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ ABOUT ══ -->
+<div id="page-about" class="page">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb"><span class="bc-item" onclick="showPage('home')">Home</span><span class="bc-sep">/</span><span class="bc-current">About Us</span></div>
+      <h1>Built on Experience.<br>Driven by Excellence.</h1>
+    </div>
+  </div>
+  <div class="section" style="background:#f4f7fc;">
+    <div class="wrap">
+      <div class="two-col">
+        <div>
+          <div class="overline">Our Story</div>
+          <p class="about-lead">"We combine the rigour of large-scale consultancy with the agility and personal accountability of a specialist firm — ensuring every client receives expert attention at every stage."</p>
+          <p class="about-text">M/s Vishnukarma Buildtech &amp; Consultants is a multidisciplinary engineering and project management consultancy specializing in large-scale infrastructure — metro rail, RRTS corridors, highways, and urban development.</p>
+          <p class="about-text">Our professionals bring decades of direct engagement with India's most significant transit projects, having worked alongside organizations such as DMRC, CMRL, NCRTC, MMRCL, SUCG Infrastructure, and L&T-SUCG JV.</p>
+          <p class="about-text">We are guided by a commitment to transparency, technical integrity, and client-first thinking. Every mandate we accept is approached with the understanding that our clients' projects represent significant public and private investments that demand nothing less than excellence.</p>
+          <div class="strength-grid mt-24">
+            <div class="strength-card"><div class="strength-title">Technical Rigour</div><div class="strength-desc">Deep expertise across civil, structural and systems disciplines.</div></div>
+            <div class="strength-card"><div class="strength-title">Contractual Acumen</div><div class="strength-desc">Strong understanding of FIDIC and Indian contract conditions.</div></div>
+            <div class="strength-card"><div class="strength-title">Schedule Mastery</div><div class="strength-desc">Advanced programming in Primavera P6, MS Project and TILOS.</div></div>
+            <div class="strength-card"><div class="strength-title">Stakeholder Management</div><div class="strength-desc">Proven ability to navigate complex, multi-party environments.</div></div>
+          </div>
+        </div>
+        <div>
+          <div class="sidebar-card">
+            <div class="sc-head">Firm Disciplines</div>
+            <ul class="sc-list">
+              <li>Project Management Consultancy (PMC)</li><li>Project Planning &amp; Scheduling</li>
+              <li>Contract Management &amp; Claims</li><li>Cost Control &amp; Quantity Surveying</li>
+              <li>Risk Management</li><li>Quality Assurance &amp; Control</li>
+              <li>Stakeholder Coordination</li><li>MIS Reporting &amp; Documentation</li>
+            </ul>
+          </div>
+          <div class="sidebar-card">
+            <div class="sc-head">Sectors Served</div>
+            <ul class="sc-list">
+              <li>Metro Rail &amp; RRTS</li><li>Underground Tunnelling (TBM/NATM)</li>
+              <li>Elevated Viaducts</li><li>Highways &amp; Flyovers</li><li>Urban &amp; Building Infrastructure</li>
+            </ul>
+          </div>
+          <div class="sidebar-card">
+            <div class="sc-head">Tools &amp; Platforms</div>
+            <ul class="sc-list">
+              <li>Primavera P6</li><li>MS Project</li><li>TILOS (Linear Scheduling)</li><li>BIM 5D</li><li>IGBC Green Practices</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section" style="background:#faf6ee;">
+    <div class="wrap">
+      <div class="overline">Our Team</div>
+      <div class="section-header">
+        <h2>The People Behind the Work</h2>
+        <p>Experienced professionals with proven track records across India's most demanding infrastructure projects.</p>
+      </div>
+      <div class="team-grid-extended">
+        <div class="team-member-card">
+          <div class="team-member-photo">👤</div>
+          <div class="team-member-body">
+            <div class="team-member-role">Owner &amp; Principal Consultant</div>
+            <div class="team-member-name">Shalabh Gupta</div>
+            <div class="team-member-qual">B.E. Civil · M.Tech Transportation Engg. · Chartered Engineer (IEI) · Primavera P6 Certified</div>
+            <div class="team-member-desc">Civil engineer and project management professional with over 23 years of experience across large-scale infrastructure and transit projects. Senior roles at SUCG Infrastructure, L&T-SUCG JV, and Ayesa-Geodata-Aarvee JV.</div>
+          </div>
+        </div>
+        <div class="team-member-card">
+          <div class="team-member-photo">👤</div>
+          <div class="team-member-body">
+            <div class="team-member-role">Financial Advisor</div>
+            <div class="team-member-name">Bishnu Aggarwal</div>
+            <div class="team-member-qual">Chartered Accountant</div>
+            <div class="team-member-desc">Qualified CA providing financial oversight, commercial review, and advisory services across the firm's consultancy mandates. Brings rigorous financial discipline to project cost management and client reporting.</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="section" style="background:#faf6ee;">
+    <div class="wrap">
+      <div class="overline">Credentials</div>
+      <div class="section-header"><h2>Certifications &amp; Memberships</h2></div>
+      <div class="cred-grid">
+        <div class="cred-card"><span class="cred-icon">🏛️</span><div class="cred-name">Chartered Engineer</div><div class="cred-sub">Institution of Engineers India (IEI)</div></div>
+        <div class="cred-card"><span class="cred-icon">📊</span><div class="cred-name">Primavera Certified</div><div class="cred-sub">P5 / P6 Project Management Software</div></div>
+        <div class="cred-card"><span class="cred-icon">🏗️</span><div class="cred-name">BIM 5D Certified</div><div class="cred-sub">Building Information Modelling — 5D</div></div>
+        <div class="cred-card"><span class="cred-icon">🌿</span><div class="cred-name">IGBC Certified</div><div class="cred-sub">Green Building Practices &amp; Platinum Advisory</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ SERVICES ══ -->
+<div id="page-services" class="page">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb"><span class="bc-item" onclick="showPage('home')">Home</span><span class="bc-sep">/</span><span class="bc-current">Services</span></div>
+      <h1>Integrated PMC Services for<br>Complex Infrastructure</h1>
+    </div>
+  </div>
+  <div class="section" style="background:#f4f7fc;">
+    <div class="wrap">
+      <div class="overline">What We Offer</div>
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:60px;margin-bottom:60px;align-items:end;">
+        <div class="section-header mb-0"><h2>End-to-End Project Management Solutions</h2></div>
+        <p style="font-size:15px;color:var(--body);line-height:1.85;font-weight:300;">Our services provide complete coverage of the project management lifecycle — from pre-construction planning through final account settlement.</p>
+      </div>
+      <div class="srv-grid">
+        <div class="srv-card">
+          <div class="srv-num">01</div><div class="srv-title">Pre Tender &amp; Post Tender Works</div>
+          <div class="srv-desc">End-to-end advisory from bid preparation through contract award and post-tender execution.</div>
+          <ul class="srv-pts"><li>Technical evaluation of bids and contractor submissions</li><li>Project planning, programme development &amp; baseline scheduling</li><li>Budget preparation and pre-tender cost analysis</li><li>Cost control measures and post-award budget management</li><li>Tender documentation review and BOQ analysis</li></ul>
+        </div>
+        <div class="srv-card">
+          <div class="srv-num">02</div><div class="srv-title">Project Monitoring &amp; Control</div>
+          <div class="srv-desc">Systematic tracking of site execution against planned targets, with corrective action protocols.</div>
+          <ul class="srv-pts"><li>Site progress monitoring and execution tracking</li><li>Earned Value Management (EVM) analysis</li><li>Daily, weekly, and monthly MIS reporting</li><li>Stakeholder progress presentations</li><li>Interface and coordination management</li></ul>
+        </div>
+        <div class="srv-card">
+          <div class="srv-num">03</div><div class="srv-title">Contract Administration</div>
+          <div class="srv-desc">Comprehensive support for all contractual obligations, from bill certification to dispute avoidance.</div>
+          <ul class="srv-pts"><li>Contract review and interpretation</li><li>BOQ review and quantity management</li><li>Contractor bill verification and certification</li><li>Variation order management and valuation</li><li>Contractual letter drafting and correspondence</li></ul>
+        </div>
+        <div class="srv-card">
+          <div class="srv-num">04</div><div class="srv-title">Claims &amp; EOT Advisory</div>
+          <div class="srv-desc">Specialist analysis and preparation of extension of time and prolongation cost claims.</div>
+          <ul class="srv-pts"><li>Delay analysis — Impacted As-Planned, TIA</li><li>EOT claim preparation and response</li><li>Prolongation and disruption cost assessment</li><li>Claims defence and mitigation strategies</li><li>Dispute resolution support</li></ul>
+        </div>
+        <div class="srv-card">
+          <div class="srv-num">05</div><div class="srv-title">Cost &amp; Commercial Control</div>
+          <div class="srv-desc">Financial management from pre-tender budget through final project account reconciliation.</div>
+          <ul class="srv-pts"><li>Pre-tender cost analysis and budgeting</li><li>Post-award budget and cost control</li><li>Cash flow management and forecasting</li><li>Cost reporting and financial MIS</li><li>Final account preparation and negotiation</li></ul>
+        </div>
+        <div class="srv-card">
+          <div class="srv-num">06</div><div class="srv-title">Risk &amp; Quality Management</div>
+          <div class="srv-desc">Structured frameworks for identifying, mitigating, and monitoring project risks and quality standards.</div>
+          <ul class="srv-pts"><li>Risk register development and tracking</li><li>Delay and interface risk mitigation planning</li><li>QA/QC framework implementation</li><li>Statutory and regulatory compliance monitoring</li><li>Safety and environmental compliance oversight</li></ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="method-section">
+    <div class="wrap">
+      <div class="overline">Our Process</div>
+      <h2 style="font-family:'Spectral', serif;font-size:clamp(26px,3vw,40px);color:var(--navy);font-weight:700;margin-bottom:8px;">A Proven Five-Stage Methodology</h2>
+      <p style="font-size:15px;color:var(--muted);max-width:520px;line-height:1.8;font-weight:300;">Structured, repeatable, and refined through years of complex project delivery.</p>
+      <div class="method-steps">
+        <div class="method-step"><span class="step-n">01</span><div class="step-t">Mobilisation &amp; Kick-off</div><div class="step-d">Stakeholder alignment, mandate scoping, and team deployment.</div></div>
+        <div class="method-step"><span class="step-n">02</span><div class="step-t">Planning &amp; Baseline</div><div class="step-d">Programme finalization, risk assessment, and baseline establishment.</div></div>
+        <div class="method-step"><span class="step-n">03</span><div class="step-t">Execution Monitoring</div><div class="step-d">Continuous progress tracking, reporting, and corrective action.</div></div>
+        <div class="method-step"><span class="step-n">04</span><div class="step-t">Performance Evaluation</div><div class="step-d">Earned value, delay analysis, and commercial reconciliation.</div></div>
+        <div class="method-step"><span class="step-n">05</span><div class="step-t">Project Closure</div><div class="step-d">Final account, closeout documentation, and handover support.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ EXPERTISE ══ -->
+<div id="page-expertise" class="page">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb"><span class="bc-item" onclick="showPage('home')">Home</span><span class="bc-sep">/</span><span class="bc-current">Expertise</span></div>
+      <h1>Specialist Knowledge Across<br>Key Disciplines</h1>
+    </div>
+  </div>
+  <div class="section" style="background:#eef3fa;">
+    <div class="wrap">
+      <div class="overline">Technical Depth</div>
+      <div class="section-header">
+        <h2>Where Our Expertise Runs Deep</h2>
+        <p>First-hand project experience across the full spectrum of infrastructure disciplines.</p>
+      </div>
+      <div class="exp-grid">
+        <div class="exp-card"><span class="exp-icon">🚇</span><div class="exp-title">Metro Rail Systems</div><div class="exp-body">Extensive senior-level experience across DMRC, CMRL, NCRTC, and MMRCL projects encompassing underground stations, tunnels, and elevated corridors. Familiarity with CMRS compliance, systems integration, and operational readiness milestones.</div></div>
+        <div class="exp-card"><span class="exp-icon">⚙️</span><div class="exp-title">Underground Tunnelling</div><div class="exp-body">Specialist knowledge in TBM (Tunnel Boring Machine) and NATM methodologies. Experience with cut-and-cover station construction, ground treatment, and associated monitoring and instrumentation requirements.</div></div>
+        <div class="exp-card"><span class="exp-icon">🚄</span><div class="exp-title">RRTS &amp; High-Speed Rail</div><div class="exp-body">Planning and PMC experience on NCRTC's Delhi-Meerut RRTS — India's first high-speed commuter corridor designed for 160–180 km/h operations — including IGBC Platinum certification advisory.</div></div>
+        <div class="exp-card"><span class="exp-icon">🌉</span><div class="exp-title">Elevated Viaducts</div><div class="exp-body">Technical expertise in elevated guideway construction planning, structural sequencing, pre-cast segment erection monitoring, and form traveller management for complex urban elevated structures.</div></div>
+        <div class="exp-card"><span class="exp-icon">🏢</span><div class="exp-title">Building Construction — Residential &amp; Commercial</div><div class="exp-body">Project management and PMC advisory across residential complexes, commercial office developments, and mixed-use structures — covering structural planning, contractor coordination, quality oversight, and delivery within budget and programme.</div></div>
+        <div class="exp-card"><span class="exp-icon">🛣️</span><div class="exp-title">Highways &amp; Urban Infrastructure</div><div class="exp-body">Project management experience across national highway widening, grade-separated interchanges, urban flyovers, and commercial building projects — providing a strong multidisciplinary foundation.</div></div>
+      </div>
+    </div>
+  </div>
+  <div class="section" style="background:#fdf9f2;">
+    <div class="wrap">
+      <div class="profile-split">
+        <div>
+          <div class="overline">Principal Consultant</div>
+          <div class="section-header"><h2>Shalabh Gupta — 23+ Years of Leadership</h2></div>
+          <p class="about-text">As Owner and Principal Consultant, Shalabh Gupta brings over two decades of senior-level experience in India's most technically demanding infrastructure projects. His career spans roles from General Manager to Strategic Planning Manager across SUCG Infrastructure, L&T-SUCG JV, and Ayesa-Geodata-Aarvee JV.</p>
+          <p class="about-text" style="margin-top:14px;">His professional journey encompasses transit infrastructure from senior planning and PMC roles on DMRC, NCRTC, CMRL, and MMRCL packages, to 3.5 years leading pre-bid tendering and technical proposal preparation, and over five years managing road, flyover, and commercial building projects across India.</p>
+        </div>
+        <div>
+          <div class="pstat-grid">
+            <div class="pstat"><div class="ps-n">23+</div><div class="ps-l">Years total professional experience</div></div>
+            <div class="pstat"><div class="ps-n">6+</div><div class="ps-l">Major transit projects</div></div>
+            <div class="pstat"><div class="ps-n">M.Tech</div><div class="ps-l">Transportation Engineering</div></div>
+            <div class="pstat"><div class="ps-n">IEI</div><div class="ps-l">Chartered Engineer designation</div></div>
+          </div>
+          <div class="sidebar-card mt-8">
+            <div class="sc-head">Key Achievements</div>
+            <ul class="sc-list">
+              <li>CMRS Compliance Approvals for operational metro systems</li>
+              <li>IGBC Platinum Certification support on NCRTC project</li>
+              <li>Advanced project monitoring systems on major contracts</li>
+              <li>Consistently high-performance ratings across multiple organisations</li>
+              <li>Led multidisciplinary teams on complex underground metro packages</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ PROJECTS ══ -->
+<div id="page-projects" class="page">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb"><span class="bc-item" onclick="showPage('home')">Home</span><span class="bc-sep">/</span><span class="bc-current">Projects</span></div>
+      <h1>Our Project Portfolio</h1>
+    </div>
+  </div>
+  <div class="section" style="background:#f4f7fc;">
+    <div class="wrap">
+      <div class="overline">Project Experience</div>
+      <div class="section-header">
+        <h2>Individual Association</h2>
+        <p>A selection of significant projects where Vishnukarma Buildtech &amp; Consultants has provided planning, contract management, and PMC advisory support.</p>
+      </div>
+      <div class="proj-tabs">
+        <button class="proj-tab active" onclick="switchProjTab('all',this)">All Projects</button>
+        <button class="proj-tab" onclick="switchProjTab('metro',this)">Metro Rail</button>
+        <button class="proj-tab" onclick="switchProjTab('rrts',this)">RRTS / High-Speed</button>
+        <button class="proj-tab" onclick="switchProjTab('urban',this)">Urban &amp; Highways</button>
+        <button class="proj-tab" onclick="switchProjTab('building',this)">Building</button>
+      </div>
+
+      <!-- ALL PROJECTS -->
+      <div id="proj-all" class="proj-tab-content active">
+        <div class="proj-grid">
+
+          <div class="proj-card">
+            <div class="proj-img-wrap"><span class="proj-status-tag proj-status-ongoing">Ongoing</span><div class="proj-img-placeholder"><span class="proj-img-icon">🏗️</span></div></div>
+            <div class="proj-body"><div class="proj-type">Underground Metro · Chennai</div><div class="proj-name">Chennai Metro Rail</div><div class="proj-detail">Underground station and viaduct packages under CMRL, involving multidisciplinary coordination, planning control, and contract management support across UG and elevated works.</div><div class="proj-tags"><span class="proj-tag">PMC</span><span class="proj-tag">Contract Advisory</span><span class="proj-tag">Scheduling</span></div></div>
+          </div>
+
+          <div class="proj-card">
+            <div class="proj-img-wrap"><span class="proj-status-tag proj-status-ongoing">Ongoing</span><div class="proj-img-placeholder"><span class="proj-img-icon">🚇</span></div></div>
+            <div class="proj-body"><div class="proj-type">Urban Metro · Delhi</div><div class="proj-name">Delhi Metro Rail (DMRC)</div><div class="proj-detail">DMRC contract package advisory covering scheduling, BOQ management, claims handling and contractual letter support throughout the full project lifecycle.</div><div class="proj-tags"><span class="proj-tag">PMC</span><span class="proj-tag">Scheduling</span><span class="proj-tag">Claims</span></div></div>
+          </div>
+
+          <div class="proj-card">
+            <div class="proj-img-wrap"><span class="proj-status-tag proj-status-completed">Completed</span><div class="proj-img-placeholder"><span class="proj-img-icon">🚄</span></div></div>
+            <div class="proj-body"><div class="proj-type">High-Speed · RRTS · Delhi-Meerut</div><div class="proj-name">NCRTC Rapid Rail Transit</div><div class="proj-detail">Strategic planning and execution advisory for India's first high-speed regional rapid transit system, including IGBC Platinum certification support and interface management.</div><div class="proj-tags"><span class="proj-tag">Planning</span><span class="proj-tag">IGBC</span><span class="proj-tag">Interface</span></div></div>
+          </div>
+
+          <div class="proj-card">
+            <div class="proj-img-wrap"><span class="proj-status-tag proj-status-completed">Completed</span><div class="proj-img-placeholder"><span class="proj-img-icon">🏙️</span></div></div>
+            <div class="proj-body"><div class="proj-type">Underground Metro · Mumbai</div><div class="proj-name">Mumbai Metro Rail (MMRCL)</div><div class="proj-detail">PMC advisory support for underground metro construction under MMRCL — encompassing TBM tunnelling coordination, progress monitoring, and contractual documentation support.</div><div class="proj-tags"><span class="proj-tag">PMC</span><span class="proj-tag">TBM</span><span class="proj-tag">Monitoring</span></div></div>
+          </div>
+
+          <div class="proj-card">
+            <div class="proj-img-wrap"><span class="proj-status-tag proj-status-completed">Completed</span><div class="proj-img-placeholder"><span class="proj-img-icon">🌉</span></div></div>
+            <div class="proj-body"><div class="proj-type">Urban Flyover · Delhi</div><div class="proj-name">Barahpulla Elevated Road</div><div class="proj-detail">Construction of a 4 km elevated corridor in Delhi designed to ease chronic congestion across South-East Delhi. PMC advisory covered scheduling, QA/QC, contractor coordination, and monthly progress reporting to the client authority.</div><div class="proj-tags"><span class="proj-tag">Elevated Road</span><span class="proj-tag">PMC</span><span class="proj-tag">QA/QC</span><span class="proj-tag">Urban</span></div></div>
+          </div>
+
+          <div class="proj-card">
+            <div class="proj-img-wrap"><span class="proj-status-tag proj-status-ongoing">Ongoing</span><div class="proj-img-placeholder"><span class="proj-img-icon">🏛️</span></div></div>
+            <div class="proj-body"><div class="proj-type">Building Construction · Delhi</div><div class="proj-name">Hindu College Hostel Building</div><div class="proj-detail">Construction of a new hostel building for Hindu College — covering structural works, finishing, MEP coordination, and project management advisory to ensure delivery on time and within budget.</div><div class="proj-tags"><span class="proj-tag">Building</span><span class="proj-tag">PMC</span><span class="proj-tag">Structural</span></div></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- METRO -->
+      <div id="proj-metro" class="proj-tab-content">
+        <div class="proj-grid">
+
+          <div class="proj-card">
+            <div class="proj-img-wrap"><span class="proj-status-tag proj-status-ongoing">Ongoing</span><div class="proj-img-placeholder"><span class="proj-img-icon">🏗️</span></div></div>
+            <div class="proj-body"><div class="proj-type">Underground Metro · Chennai</div><div class="proj-name">Chennai Metro Rail</div><div class="proj-detail">Underground station and viaduct packages under CMRL, involving multidisciplinary coordination, planning control, and contract management support.</div><div class="proj-tags"><span class="proj-tag">PMC</span><span class="proj-tag">Contract Advisory</span><span class="proj-tag">Scheduling</span></div></div>
+          </div>
+
+          <div class="proj-card">
+            <div class="proj-img-wrap"><span class="proj-status-tag proj-status-ongoing">Ongoing</span><div class="proj-img-placeholder"><span class="proj-img-icon">🚇</span></div></div>
+            <div class="proj-body"><div class="proj-type">Urban Metro · Delhi</div><div class="proj-name">Delhi Metro Rail (DMRC)</div><div class="proj-detail">DMRC contract package advisory covering scheduling, BOQ management, claims handling and contractual letter support.</div><div class="proj-tags"><span class="proj-tag">PMC</span><span class="proj-tag">Scheduling</span><span class="proj-tag">Claims</span></div></div>
+          </div>
+
+          <div class="proj-card">
+            <div class="proj-img-wrap"><span class="proj-status-tag proj-status-completed">Completed</span><div class="proj-img-placeholder"><span class="proj-img-icon">🏙️</span></div></div>
+            <div class="proj-body"><div class="proj-type">Underground Metro · Mumbai</div><div class="proj-name">Mumbai Metro Rail (MMRCL)</div><div class="proj-detail">PMC advisory support for underground metro construction under MMRCL — TBM tunnelling coordination, progress monitoring, and contractual documentation.</div><div class="proj-tags"><span class="proj-tag">PMC</span><span class="proj-tag">TBM</span><span class="proj-tag">Monitoring</span></div></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- RRTS -->
+      <div id="proj-rrts" class="proj-tab-content">
+        <div class="proj-grid">
+
+          <div class="proj-card">
+            <div class="proj-img-wrap"><span class="proj-status-tag proj-status-completed">Completed</span><div class="proj-img-placeholder"><span class="proj-img-icon">🚄</span></div></div>
+            <div class="proj-body"><div class="proj-type">High-Speed · RRTS · Delhi-Meerut</div><div class="proj-name">NCRTC Rapid Rail Transit</div><div class="proj-detail">Strategic planning and execution advisory for India's first high-speed regional rapid transit system, including IGBC Platinum certification support and interface management.</div><div class="proj-tags"><span class="proj-tag">Planning</span><span class="proj-tag">IGBC</span><span class="proj-tag">Interface</span></div></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- URBAN & HIGHWAYS -->
+      <div id="proj-urban" class="proj-tab-content">
+        <div class="proj-grid">
+
+          <div class="proj-card">
+            <div class="proj-img-wrap"><span class="proj-status-tag proj-status-completed">Completed</span><div class="proj-img-placeholder"><span class="proj-img-icon">🌉</span></div></div>
+            <div class="proj-body"><div class="proj-type">Urban Flyover · Delhi</div><div class="proj-name">Barahpulla Elevated Road</div><div class="proj-detail">4 km elevated corridor PMC advisory covering scheduling, QA/QC, contractor coordination, and monthly progress reporting to the client authority.</div><div class="proj-tags"><span class="proj-tag">Elevated Road</span><span class="proj-tag">PMC</span><span class="proj-tag">QA/QC</span><span class="proj-tag">Urban</span></div></div>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- BUILDING -->
+      <div id="proj-building" class="proj-tab-content">
+        <div class="proj-grid">
+
+          <div class="proj-card">
+            <div class="proj-img-wrap"><span class="proj-status-tag proj-status-ongoing">Ongoing</span><div class="proj-img-placeholder"><span class="proj-img-icon">🏛️</span></div></div>
+            <div class="proj-body"><div class="proj-type">Building Construction · Delhi</div><div class="proj-name">Hindu College Hostel Building</div><div class="proj-detail">Construction of a new hostel building for Hindu College — covering structural works, finishing, MEP coordination, and project management advisory to ensure delivery on time and within budget.</div><div class="proj-tags"><span class="proj-tag">Building</span><span class="proj-tag">PMC</span><span class="proj-tag">Structural</span></div></div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ CONTACT ══ -->
+<div id="page-contact" class="page">
+  <div class="page-hero">
+    <div class="page-hero-inner">
+      <div class="breadcrumb"><span class="bc-item" onclick="showPage('home')">Home</span><span class="bc-sep">/</span><span class="bc-current">Contact</span></div>
+      <h1>Let's Discuss Your Project</h1>
+    </div>
+  </div>
+  <div class="section" style="background:#f4f7fc;">
+    <div class="wrap">
+      <div class="contact-split">
+        <div>
+          <div class="overline">Reach Out</div>
+          <div class="section-header">
+            <h2>We'd welcome the opportunity to assist.</h2>
+            <p>Whether you are seeking specialist planning support, contract management advisory, or full-scope PMC services, we invite you to reach out for an initial discussion.</p>
+          </div>
+          <div class="contact-info-card">
+            <div class="ci-block"><div class="ci-label">Proprietor</div><div class="ci-value">Shalabh Gupta</div></div>
+            <div class="ci-block"><div class="ci-label">Organisation</div><div class="ci-value">M/s Vishnukarma Buildtech &amp; Consultants</div></div>
+            <div class="ci-block"><div class="ci-label">Mobile</div><div class="ci-value"><a href="tel:+919811781409">+91 98117 81409</a></div></div>
+            <div class="ci-block mb-0">
+              <div class="ci-label">Registered Address</div>
+              <div class="ci-value">Flat No. 3A, Sanchar Lok Apartments<br>I.P. Extension, Patparganj<br>Opposite Max Hospital, Delhi – 110092</div>
+            </div>
+          </div>
+          <div class="ci-block">
+            <div class="ci-label">Operating Days</div>
+            <div class="ci-value">Monday to Saturday<br><span style="font-size:13px;color:var(--muted)">Flexible scheduling · Out-of-station engagements as required</span></div>
+          </div>
+        </div>
+        <div>
+          <div class="form-card">
+            <h3>Send an Enquiry</h3>
+            <p class="form-sub">We typically respond within one business day. All enquiries are treated with the utmost confidentiality.</p>
+
+            <div class="f-row">
+              <div class="f-field"><label>First Name *</label><input type="text" id="f_first" placeholder="First name" required></div>
+              <div class="f-field"><label>Last Name *</label><input type="text" id="f_last" placeholder="Last name" required></div>
+            </div>
+            <div class="f-field"><label>Organisation</label><input type="text" id="f_org" placeholder="Company / Organisation"></div>
+            <div class="f-field"><label>Email Address *</label><input type="email" id="f_email" placeholder="email@organisation.com" required></div>
+            <div class="f-field"><label>Phone</label><input type="tel" id="f_phone" placeholder="+91 XXXXX XXXXX"></div>
+            <div class="f-field">
+              <label>Nature of Enquiry</label>
+              <select id="f_service">
+                <option value="">Select service area</option>
+                <option>Project Planning &amp; Scheduling</option>
+                <option>Contract Administration</option>
+                <option>Claims &amp; EOT Advisory</option>
+                <option>Cost &amp; Commercial Control</option>
+                <option>Full PMC Mandate</option>
+                <option>General Enquiry</option>
+              </select>
+            </div>
+            <div class="f-field"><label>Project Brief</label><textarea rows="4" id="f_message" placeholder="Briefly describe your project and requirements..."></textarea></div>
+
+            <button class="f-submit" id="submitBtn" onclick="submitEnquiry()">
+              <span id="btnText">Submit Enquiry</span>
+              <span class="spinner" id="btnSpinner"></span>
+            </button>
+
+            <div class="form-status" id="formStatus"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══ FOOTER ══ -->
+<footer>
+  <div class="foot-inner">
+    <div class="foot-top">
+      <div>
+        <div style="display:flex;align-items:center;gap:16px;margin-bottom:4px;">
+          <div style="width:72px;height:72px;background:rgba(255,255,255,0.06);border:1.5px dashed rgba(184,137,42,0.5);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:5px;flex-shrink:0;">
+            <svg width="30" height="30" viewBox="0 0 28 28" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <rect x="3" y="7" width="22" height="16" rx="1" stroke="#d4a84b" stroke-width="1.4" fill="none"/>
+              <circle cx="10" cy="13" r="2.5" stroke="#d4a84b" stroke-width="1.2" fill="none"/>
+              <path d="M3 20 L9 14.5 L13.5 18.5 L18 13 L25 20" stroke="#d4a84b" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+              <path d="M12 7 L14 4 L16 7" stroke="#d4a84b" stroke-width="1.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+          <div>
+            <div style="font-family:'Spectral', serif;font-size:15px;font-weight:700;color:white;">Vishnukarma Buildtech</div>
+            <div style="font-size:9.5px;letter-spacing:0.16em;text-transform:uppercase;color:var(--gold-lt);margin-top:2px;">&amp; Consultants</div>
+            <div style="font-size:9px;letter-spacing:0.1em;text-transform:uppercase;color:rgba(212,168,75,0.45);margin-top:6px;">Building · Engineering · Planning · Consulting</div>
+          </div>
+        </div>
+        <p class="foot-brand-desc">Specialist Project Management Consultancy for metro rail, RRTS, and large-scale civil infrastructure projects across India.</p>
+      </div>
+      <div>
+        <div class="foot-col-h">Navigation</div>
+        <ul class="foot-links">
+          <li onclick="showPage('home')">Home</li><li onclick="showPage('about')">About Us</li>
+          <li onclick="showPage('services')">Services</li><li onclick="showPage('expertise')">Expertise</li>
+          <li onclick="showPage('projects')">Projects</li><li onclick="showPage('contact')">Contact</li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-col-h">Services</div>
+        <ul class="foot-links">
+          <li>Project Planning &amp; Scheduling</li><li>Contract Administration</li>
+          <li>Claims &amp; EOT Advisory</li><li>Cost &amp; Commercial Control</li><li>Risk &amp; Quality Management</li>
+        </ul>
+      </div>
+      <div>
+        <div class="foot-col-h">Contact</div>
+        <ul class="foot-links">
+          <li>+91 98117 81409</li><li>I.P. Extension, Patparganj</li>
+          <li>Delhi – 110092</li><li>Mon – Sat · Pan-India</li>
+        </ul>
+      </div>
+    </div>
+    <div class="foot-bottom">
+      <span class="foot-copy">© 2025 M/s Vishnukarma Buildtech &amp; Consultants. All Rights Reserved.</span>
+      <span class="foot-right">Infrastructure · Planning · Contract Management · PMC</span>
+    </div>
+  </div>
+</footer>
+
+<button class="scroll-top" id="scrollTopBtn" onclick="window.scrollTo({top:0,behavior:'smooth'})">↑</button>
+
+<script>
+
+const EMAILJS_PUBLIC_KEY  = 'KNFaN68n0ku2dsdpB';
+const EMAILJS_SERVICE_ID  = 'service_2zqa8sp';
+const EMAILJS_TEMPLATE_ID = 'template_45hoquk';
+
+const RECIPIENT_1 = 'vkbc003@gmail.com';
+
+// ─── EMAILJS INIT ───
+(function() {
+  try {
+    emailjs.init({ publicKey: EMAILJS_PUBLIC_KEY });
+  } catch(e) { console.warn('EmailJS init failed', e); }
+})();
+
+// ─── FORM SUBMISSION ───
+async function submitEnquiry() {
+  const firstName = document.getElementById('f_first').value.trim();
+  const lastName  = document.getElementById('f_last').value.trim();
+  const email     = document.getElementById('f_email').value.trim();
+  const phone     = document.getElementById('f_phone').value.trim();
+  const org       = document.getElementById('f_org').value.trim();
+  const service   = document.getElementById('f_service').value;
+  const message   = document.getElementById('f_message').value.trim();
+
+  const statusEl  = document.getElementById('formStatus');
+  const btn       = document.getElementById('submitBtn');
+  const btnText   = document.getElementById('btnText');
+  const spinner   = document.getElementById('btnSpinner');
+
+  if (!firstName || !email) {
+    showStatus('error', '⚠️ Please fill in your name and email address before submitting.');
+    return;
+  }
+  if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+    showStatus('error', '⚠️ Please enter a valid email address.');
+    return;
+  }
+
+  btn.disabled = true;
+  btnText.textContent = 'Sending...';
+  spinner.style.display = 'block';
+  showStatus('sending', '📤 Sending your enquiry...');
+
+  const templateParams = {
+    from_name:       `${firstName} ${lastName}`,
+    from_email:      email,
+    phone:           phone || 'Not provided',
+    organisation:    org || 'Not provided',
+    service_type:    service || 'Not specified',
+    message:         message || 'No message provided',
+    submission_time: new Date().toLocaleString('en-IN', { timeZone: 'Asia/Kolkata', dateStyle: 'full', timeStyle: 'short' }),
+  };
+
+  try {
+    await emailjs.send(EMAILJS_SERVICE_ID, EMAILJS_TEMPLATE_ID, {
+      ...templateParams,
+      to_email: RECIPIENT_1,
+    });
+
+    showStatus('success', '✅ Your enquiry has been sent successfully! We will respond within one business day.');
+    btnText.textContent = '✓ Enquiry Sent';
+    btn.style.background = '#1a6832';
+
+    setTimeout(() => {
+      document.getElementById('f_first').value = '';
+      document.getElementById('f_last').value = '';
+      document.getElementById('f_org').value = '';
+      document.getElementById('f_email').value = '';
+      document.getElementById('f_phone').value = '';
+      document.getElementById('f_service').value = '';
+      document.getElementById('f_message').value = '';
+      btnText.textContent = 'Submit Enquiry';
+      btn.style.background = '';
+      btn.disabled = false;
+      spinner.style.display = 'none';
+    }, 4000);
+
+  } catch (err) {
+    console.error('EmailJS error:', err);
+    showStatus('error', '❌ There was a problem sending your enquiry. Please try again or call us directly at +91 98117 81409.');
+    btnText.textContent = 'Submit Enquiry';
+    btn.disabled = false;
+    spinner.style.display = 'none';
+  }
+}
+
+function showStatus(type, msg) {
+  const el = document.getElementById('formStatus');
+  el.className = 'form-status ' + type;
+  el.textContent = msg;
+  el.style.display = 'block';
+  el.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+}
+
+// ─── PAGE NAVIGATION ───
+const pageOrder = ['home','about','services','expertise','projects','contact'];
+function showPage(id) {
+  document.querySelectorAll('.page').forEach(p => p.classList.remove('active'));
+  document.getElementById('page-' + id).classList.add('active');
+  document.querySelectorAll('.nav-tab').forEach((t, i) => t.classList.toggle('active', pageOrder[i] === id));
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+// ─── HERO SLIDER ───
+let currentSlide = 0;
+const slides = document.querySelectorAll('.hero-slide');
+const sdots = document.querySelectorAll('.sdot');
+function goSlide(n) {
+  slides[currentSlide].classList.remove('active');
+  sdots[currentSlide].classList.remove('active');
+  currentSlide = n;
+  slides[currentSlide].classList.add('active');
+  sdots[currentSlide].classList.add('active');
+}
+setInterval(() => goSlide((currentSlide + 1) % slides.length), 5500);
+
+// ─── TESTIMONIALS ───
+let currentTesti = 0;
+const testiSlides = document.querySelectorAll('.testi-slide');
+const testiDots = document.querySelectorAll('.testi-dot');
+function goTesti(n) {
+  testiSlides[currentTesti].classList.remove('active');
+  testiDots[currentTesti].classList.remove('active');
+  currentTesti = n;
+  testiSlides[currentTesti].classList.add('active');
+  testiDots[currentTesti].classList.add('active');
+}
+function nextTesti() { goTesti((currentTesti + 1) % testiSlides.length); }
+function prevTesti() { goTesti((currentTesti - 1 + testiSlides.length) % testiSlides.length); }
+setInterval(nextTesti, 6000);
+
+// ─── PROJECTS TAB ───
+function switchProjTab(tab, el) {
+  document.querySelectorAll('.proj-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.proj-tab-content').forEach(c => c.classList.remove('active'));
+  el.classList.add('active');
+  const target = document.getElementById('proj-' + tab);
+  if (target) target.classList.add('active');
+  else document.getElementById('proj-all').classList.add('active');
+}
+
+// ─── SCROLL TO TOP ───
+window.addEventListener('scroll', () => {
+  document.getElementById('scrollTopBtn').classList.toggle('show', window.scrollY > 400);
+});
+
+</script>
+
+</body>
+</html>
